@@ -66,7 +66,7 @@ GDP = C + I + G + (X - M)
 
 which appears to show imports (M) being subtracted. The problem is that imports are also counted in consumption, C. If they are counted in consumption, then subtracted later in the formula, their impact on the final number is nil.
 
-This is probably one of the silliest ideas featured in this book. It's comparable to looking at Einstein's famous equation E = mc[^n2] and assuming it means that matter is made out of energy, and maybe we can convert between them if we throw baseballs hard enough. Despite this, it is also one of the ideas that has received the most endorsement by otherwise intelligent people. Truly baffling.
+This is probably one of the silliest ideas featured in this book. It's comparable to looking at Einstein's famous equation E = mc^2^ and assuming it means that matter is made out of energy, and maybe we can convert between them if we throw baseballs hard enough. Despite this, it is also one of the ideas that has received the most endorsement by otherwise intelligent people. Truly baffling.
 
 ## Take 5: The stock market is fake. {#take-5}
 
@@ -157,7 +157,6 @@ I'm very uncertain about any conclusions that I can draw here, due to my lack of
 [^n171]: [reuters.com/world/americas/first-time-decades-cubas-private-sector-...](https://www.reuters.com/world/americas/first-time-decades-cubas-private-sector-outweighs-state-2025-07-29/)
 [^n172]: [noahpinion.blog/p/why-do-econ-journalists-keep-making](https://www.noahpinion.blog/p/why-do-econ-journalists-keep-making) ; [noahpinion.blog/p/imports-do-not-subtract-from-gdp](https://www.noahpinion.blog/p/imports-do-not-subtract-from-gdp)
 [^n173]: [bea.gov/news/2025/gross-domestic-product-1st-quarter-2025-advance-e...](https://www.bea.gov/news/2025/gross-domestic-product-1st-quarter-2025-advance-estimate)
-[^n2]: [washingtonpost.com/business/2025/11/29/poverty-line-green/](https://www.washingtonpost.com/business/2025/11/29/poverty-line-green/)
 [^n174]: [news.gallup.com/poll/266807/percentage-americans-owns-stock.aspx](https://news.gallup.com/poll/266807/percentage-americans-owns-stock.aspx)
 [^n175]: [fred.stlouisfed.org/series/WFRBST01122](https://fred.stlouisfed.org/series/WFRBST01122)
 [^n176]: [fred.stlouisfed.org/series/UNRATE](https://fred.stlouisfed.org/series/UNRATE)

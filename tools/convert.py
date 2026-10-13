@@ -149,7 +149,10 @@ class Converter:
                 if n not in page.notes_used:
                     page.notes_used.append(n)
                 return f"[^n{n}]" + (" " if m.group(2) else "")
+            # Superscripts that are not note numbers (they break the 1, 2, 3, ... sequence in print).
+            line = line.replace("E = mc^2^", "E = mc^\u00002^")
             line = NOTE_REF.sub(note_sub, line)
+            line = line.replace("^\u00002^", "^2^")
             line = self.cross_links(line, page)
 
             def image_sub(m):
