@@ -77,7 +77,7 @@ format:
       dark: [cosmo, theme-dark.scss]
     number-sections: false
     toc: false
-    include-after-body: [sidebar-takes.html, search-enter.html]
+    include-after-body: [sidebar-takes.html, search-enter.html, editor-mode.html]
     footnotes-hover: true
     link-external-newwindow: true
     link-external-icon: false

@@ -1,0 +1,13 @@
+<script>
+// "Edit this page" (bottom of each page) is hidden from readers. To show it in your own browser,
+// open any page once with #editor-on at the end of the address; #editor-off hides it again.
+// The setting is remembered in that browser only.
+(() => {
+  const KEY = "bebh-editor";
+  try {
+    if (location.hash === "#editor-on") localStorage.setItem(KEY, "1");
+    if (location.hash === "#editor-off") localStorage.removeItem(KEY);
+    if (localStorage.getItem(KEY) === "1") document.documentElement.classList.add("editor-mode");
+  } catch (e) { /* storage blocked: link stays hidden */ }
+})();
+</script>

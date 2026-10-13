@@ -66,3 +66,7 @@ h2.sr-page { font-size: 1.25rem; margin-top: 2rem; }
 .sr-link { font-weight: 600; }
 .sr-snip { overflow-wrap: anywhere; margin: .25rem 0 0; font-size: .92rem; line-height: 1.5; color: rgba(var(--bs-body-color-rgb), .85); }
 .sr-snip mark { background: rgba(143, 29, 29, .16); color: inherit; padding: 0 .1em; border-radius: 2px; }
+
+/* "Edit this page": hidden unless this browser has editor mode on (editor-mode.html) */
+.toc-actions { display: none; }
+.editor-mode .toc-actions { display: block; }
