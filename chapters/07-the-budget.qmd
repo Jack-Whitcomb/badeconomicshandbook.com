@@ -20,7 +20,7 @@ It's also worthwhile to note just how rare this strategy is. I'm sure there are 
 
 A related take is that the rich don't pay more taxes than those poorer than them as a share of their income (e.g., as shared in this endnoted source[^n208]). This is... slightly true. Federal taxes paid as a percentage of earnings show great progressivity:[^n209]
 
-![](../images/ch07-03.png){width="82%"}
+![](../images/ch07-03.png){width="95%"}
 
 and if you include *all* taxes, including state and local, you get this:[^n210]
 
