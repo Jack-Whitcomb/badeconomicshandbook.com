@@ -51,15 +51,21 @@ book:
     - about.qmd
     - search.qmd   # full search results; hidden from the sidebar by tools/sidebar_takes.py
 
-# Reader comments (Giscus). Fill in once the GitHub repository exists;
-# see README.md, "Turning on comments".
-# comments:
-#   giscus:
-#     repo: YOUR-GITHUB-NAME/bad-economics-handbook
-#     category: Comments
-#     mapping: pathname
-#     reactions-enabled: true
-#     loading: lazy
+# Reader comments (Giscus): stored in the repository's Discussions, "Comments" category.
+# Readers sign in with GitHub to comment. One discussion per page, created on the first comment.
+comments:
+  giscus:
+    repo: Jack-Whitcomb/badeconomicshandbook.com
+    repo-id: R_kgDOVG2ZHg
+    category: Comments
+    category-id: DIC_kwDOVG2ZHs4DIS9E
+    mapping: pathname
+    reactions-enabled: true
+    input-position: top
+    loading: lazy
+    theme:
+      light: light
+      dark: dark
 
 language:
   search-text-placeholder: "Search the book"

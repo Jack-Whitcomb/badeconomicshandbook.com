@@ -1,6 +1,7 @@
 ---
 title: "Search results"
 search: false
+comments: false
 ---
 
 <!-- Full list of search hits. The sidebar search box sends Enter here (search-enter.html).

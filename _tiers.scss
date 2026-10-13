@@ -3,7 +3,8 @@ main p, main li { line-height: 1.6; }
 /* Text column: about 80 characters per line, centered in the space to the right of the sidebar
    (like econometrics-with-r.org). Quarto's grid would otherwise left-align a ~900px column. */
 @media (min-width: 992px) {
-  #quarto-content > main.content { grid-column: body-content-start / screen-end-inset;
+  #quarto-content > main.content, #quarto-content > .giscus, #quarto-content > nav.page-navigation {
+    grid-column: body-content-start / screen-end-inset;
     width: 100%; max-width: 720px; margin-left: auto; margin-right: auto; }
 }
 main img { display: block; max-width: 100%; height: auto; margin: 1.25rem auto; border-radius: 3px; }
