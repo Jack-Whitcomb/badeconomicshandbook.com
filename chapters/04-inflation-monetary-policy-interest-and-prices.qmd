@@ -37,12 +37,6 @@ One way we can check this claim is by looking at inflation in low and high conce
 
 This figure comes from the attached endnote.[^n134] As you can see, low concentration industries did not experience lower inflation than high concentration industries. While this analysis is not causal, it is suggestive that the supply shock story is correct, and should at least rule out overconfident, simplistic stories about greed driving inflation. We would like something like a natural experiment as a check, but those are rarely available to macroeconomists.
 
-There are other claims Sanders made that are flatly false and worth addressing here. He wrote that "Today, we live in an economy in which the billionaires are getting much richer while working families fall further behind." This was incorrect. A graph of billionaire wealth is shown below.[^n135]
-
-![](../images/ch04-04.png){width="95%"}
-
-Billionaire wealth was flat when Sanders was writing, and declining in inflation-adjusted terms (the chart uses nominal data). In 2023, you can see billionaire wealth *declining* rather than rising. Much of a billionaire's wealth comes from holding stock, and the stock market was struggling in 2022 and 2023. Over the course of 2022, the S&P 500 (an index of the stocks of the 500 largest companies in America) declined by about 18%. It had recovered its losses at the end of 2023, but registered an overall decline in real (inflation-adjusted) terms.
-
 Many beliefs about the economy described in this book are like string theory in that they have some theoretical beauty to them but cannot be confirmed by evidence (at least for now). This is one such belief. I can't strictly call it false, but there's a much simpler explanation for how this works. The evidence doesn't allow us to rule out the standard picture.
 
 ## Take 2: Price gouging is real, and should be addressed with price controls. {#take-2}
@@ -135,7 +129,6 @@ The Fed is not legally allowed to pay for a policy like Medicare for All, and fo
 [^n132]: [epi.org/blog/corporate-profits-have-contributed-disproportionately-...](https://www.epi.org/blog/corporate-profits-have-contributed-disproportionately-to-inflation-how-should-policymakers-respond/)
 [^n133]: The graph is a recreation of the one in here: [nber.org/system/files/working\_papers/w32859/w32859.pdf](https://www.nber.org/system/files/working_papers/w32859/w32859.pdf)
 [^n134]: The graph is a recreation of the one in here: [thecgo.org/wp-content/uploads/2023/03/Does-market-concentration-con...](https://www.thecgo.org/wp-content/uploads/2023/03/Does-market-concentration-contribute-to-inflation-v3.pdf)
-[^n135]: [kaggle.com/datasets/guillemservera/forbes-billionaires-1997-2023/data](https://www.kaggle.com/datasets/guillemservera/forbes-billionaires-1997-2023/data)
 [^n136]: [npr.org/2024/10/12/nx-s1-5150153/residents-in-hurricane-affected-st...](https://www.npr.org/2024/10/12/nx-s1-5150153/residents-in-hurricane-affected-states-are-complaining-of-price-gouging-what-is-it)
 [^n137]: [journals.uchicago.edu/doi/10.1086/712419#:~:text=We exploit the fac...](https://www.journals.uchicago.edu/doi/10.1086/712419#:~:text=We%20exploit%20the%20fact%20that,of%20restrictions%20on%20price%20movements.)
 [^n138]: [jrayl.github.io/files/Dinerstein\_Lucas\_Nath\_Rayl\_PriceGouging.pdf](https://jrayl.github.io/files/Dinerstein_Lucas_Nath_Rayl_PriceGouging.pdf)

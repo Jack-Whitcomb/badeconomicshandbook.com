@@ -14,6 +14,21 @@ GitHub and click the pencil icon), make the change, then **Commit changes**.
 "Edit this page" is hidden from readers. To show it in your browser, open any page once with `#editor-on`
 added to the address (e.g. `https://badeconomicshandbook.com/#editor-on`); `#editor-off` hides it again.
 
+## Footnotes (endnotes)
+
+On the site, notes are numbered automatically, starting from 1 on each page, in the order they appear.
+In the `.qmd` files a note has two parts: a marker in the text, like `[^n135]`, and its text at the
+bottom of the file, on a line starting with `[^n135]:`. The `n135` part is just a name (it was the note's
+number in the print edition when the site was made). Names never need renumbering.
+
+- **Remove a note:** delete its marker from the text and its `[^n135]: ...` line at the bottom.
+  Everything after it renumbers itself.
+- **Add a note:** put a marker with any new name where the number should go, e.g. `[^tax2027]`, and add
+  a line at the bottom: `[^tax2027]: https://example.com/source`. Names just have to be unique on that page.
+- If you delete a marker but forget the bottom line, nothing breaks; the unused note isn't shown.
+
+(Print edition: `add_endnotes.py` and `remove_endnotes.py` in the book folder do the same for the `.odt`.)
+
 ## Folder layout
 
 - `_quarto.yml`: site settings (title, sidebar, chapter list, comments, footer)
