@@ -1,0 +1,13 @@
+---
+title: "About this edition"
+---
+
+This is the free web edition of *The Bad Economics Handbook* by Jack Whitcomb. A print edition is also available.
+
+## License {#license}
+
+**Text:** © 2026 Jack Whitcomb. All rights reserved. You're welcome to quote short passages with a link back to this site.
+
+**Illustrations:** charts, graphs and other illustrations created by the author are dedicated to the public domain under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). You can copy, modify and use them for any purpose, including commercially, without asking or giving credit.
+
+Figures, screenshots and photos made by others appear here under their own terms (credited in the text or its sources) and are not covered by CC0.

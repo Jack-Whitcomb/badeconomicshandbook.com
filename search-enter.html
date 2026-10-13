@@ -1,0 +1,19 @@
+<script>
+// Pressing Enter in the search box opens a full list of hits (search.html) instead of the
+// first suggestion. If the reader has picked a suggestion with the arrow keys, Enter opens it as usual.
+(() => {
+  let picked = false;
+  const root = document.querySelector('meta[name="quarto:offset"]')?.content || "./";
+  addEventListener("keydown", e => {
+    if (!e.target.matches?.(".aa-Input")) return;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") { picked = true; return; }
+    if (e.key !== "Enter" || picked || e.isComposing) return;
+    const q = e.target.value.trim();
+    if (!q) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    location.href = root + "search.html?query=" + encodeURIComponent(q);
+  }, true);
+  addEventListener("input", e => { if (e.target.matches?.(".aa-Input")) picked = false; }, true);
+})();
+</script>

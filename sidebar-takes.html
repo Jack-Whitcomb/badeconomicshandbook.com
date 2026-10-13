@@ -1,0 +1,24 @@
+<script>
+// Highlight the Take you're reading in the left sidebar, and keep it in view.
+document.addEventListener("DOMContentLoaded", () => {
+  const here = location.pathname.split("/").pop() || "index.html";
+  const links = [...document.querySelectorAll("a.sidebar-take")]
+    .filter(a => a.getAttribute("href").split("#")[0].split("/").pop() === here);
+  if (!links.length) return;
+  const byId = Object.fromEntries(links.map(a => [a.dataset.take, a]));
+  const sections = links.map(a => document.getElementById(a.dataset.take)).filter(Boolean);
+  let current = null;
+  const update = () => {
+    let id = sections[0].id;
+    for (const s of sections) if (s.getBoundingClientRect().top < 140) id = s.id;
+    if (id === current) return;
+    current = id;
+    links.forEach(a => a.classList.toggle("active", a.dataset.take === id));
+    const box = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+    const a = byId[id], r = a.getBoundingClientRect();
+    if (box && (r.top < 80 || r.bottom > innerHeight - 40)) a.scrollIntoView({block: "center"});
+  };
+  addEventListener("scroll", update, {passive: true});
+  update();
+});
+</script>

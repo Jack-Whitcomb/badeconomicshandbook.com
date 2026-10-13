@@ -1,0 +1,67 @@
+main p, main li { line-height: 1.6; }
+
+/* Text column: about 80 characters per line, centered in the space to the right of the sidebar
+   (like econometrics-with-r.org). Quarto's grid would otherwise left-align a ~900px column. */
+@media (min-width: 992px) {
+  #quarto-content > main.content { grid-column: body-content-start / screen-end-inset;
+    width: 100%; max-width: 720px; margin-left: auto; margin-right: auto; }
+}
+main img { display: block; max-width: 100%; height: auto; margin: 1.25rem auto; border-radius: 3px; }
+.quarto-title .title { font-weight: 700; }
+h2 { margin-top: 2.5rem; padding-top: .5rem; border-top: 1px solid rgba(128,128,128,.25); }
+
+/* Tier badges */
+.rating {
+  display: inline-block; font-family: system-ui, sans-serif; font-size: .78rem;
+  font-weight: 650; letter-spacing: .02em; padding: .12rem .55rem; border-radius: 999px;
+  color: #fff; vertical-align: .1em;
+}
+.tier-a { background: #2e7d32; }
+.tier-b { background: #00796b; }
+.tier-c { background: #b8860b; }
+.tier-d { background: #d2691e; }
+.tier-f { background: #b71c1c; }
+.tier-superf { background: #111; box-shadow: inset 0 0 0 2px #b71c1c; }
+li .rating { margin-left: .4rem; font-size: .7rem; }
+
+/* Landing page */
+.cover-hero { display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap; margin-top: 1rem; }
+.cover-hero img { width: 260px; max-width: 70vw; margin: 0; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.cover-hero .blurb { flex: 1 1 280px; }
+.start-btn { display: inline-block; margin: .4rem .6rem .4rem 0; padding: .55rem 1.1rem; border-radius: 6px;
+  background: $primary; color: #fff !important; text-decoration: none; font-family: system-ui, sans-serif; font-size: .95rem; }
+.start-btn.secondary { background: transparent; color: $primary !important; box-shadow: inset 0 0 0 1.5px $primary; }
+@media (max-width: 576px) { html { font-size: 16px; } }
+/* Phones: long footnote URLs wrap, and wide tables scroll sideways instead of widening the page. */
+main a { overflow-wrap: anywhere; }
+@media (max-width: 767px) { main table, main mjx-container { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; } }
+
+/* Sidebar: smaller text, Takes nested under chapters */
+#quarto-sidebar .sidebar-item .sidebar-link { font-size: .86rem; font-weight: 700; padding-top: .3rem; padding-bottom: .3rem; }
+#quarto-sidebar .sidebar-item { margin-bottom: .35rem; }
+#quarto-sidebar .sidebar-title { font-size: 1.15rem; }
+#quarto-sidebar .sidebar-takes { list-style: none; margin: .25rem 0 .8rem; padding-left: .8rem;
+  border-left: 1px solid rgba(128,128,128,.25); }
+#quarto-sidebar .sidebar-takes li { margin: 0; white-space: normal; overflow-wrap: anywhere; }
+#quarto-sidebar .sidebar-takes { white-space: normal; max-width: 100%; }
+#quarto-sidebar a.sidebar-take { display: block; font-size: .76rem; line-height: 1.35; padding: .3rem 0 .3rem .1rem;
+  color: rgba(var(--bs-body-color-rgb), .68); text-decoration: none; }
+#quarto-sidebar a.sidebar-take:hover { color: $primary; }
+#quarto-sidebar a.sidebar-take.active { color: $primary; font-weight: 600; }
+
+/* Introduction: "Why?" between heading and body size, italic, not bold (as in the print edition) */
+.why-subtitle .quarto-title .subtitle { font-size: 1.5rem; font-style: italic; font-weight: 400;
+  line-height: 1.2; margin-top: .1rem; }
+
+/* Search box: a little more prominent */
+#quarto-sidebar .aa-Form, #quarto-sidebar #quarto-search { font-size: .9rem; }
+
+/* Search results page (search.qmd) */
+.sr-form input { width: 100%; padding: .5rem .75rem; font: inherit; border: 1px solid rgba(128,128,128,.45);
+  border-radius: 6px; background: transparent; color: inherit; }
+.sr-summary { color: rgba(var(--bs-body-color-rgb), .7); margin: .8rem 0 0; }
+h2.sr-page { font-size: 1.25rem; margin-top: 2rem; }
+.sr-hit { margin: 0 0 1.1rem; }
+.sr-link { font-weight: 600; }
+.sr-snip { overflow-wrap: anywhere; margin: .25rem 0 0; font-size: .92rem; line-height: 1.5; color: rgba(var(--bs-body-color-rgb), .85); }
+.sr-snip mark { background: rgba(143, 29, 29, .16); color: inherit; padding: 0 .1em; border-radius: 2px; }
