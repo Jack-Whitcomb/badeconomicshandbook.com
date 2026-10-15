@@ -13,23 +13,16 @@
 </head>
 <body>
 
-<!-- Sign-in: a GitHub token that can write to the site's repository -->
+<!-- Sign-in: a GitHub token that can write to the site's repository (fine-grained, this repository only:
+     Contents read and write, Actions read-only) -->
 <div id="signin" class="signin" hidden>
   <h1>The Bad Economics Handbook</h1>
   <p class="lede">Editor</p>
-  <p>To save changes, this editor needs a GitHub token that can edit the website's repository. You only do this once per browser.</p>
-  <ol>
-    <li>Open <a id="token-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub’s new-token page</a> (signed in as Jack-Whitcomb).</li>
-    <li>Give it any name. Under <b>Repository access</b>, pick <b>Only select repositories</b> and choose <b>badeconomicshandbook.com</b>.</li>
-    <li>Under <b>Permissions → Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>, and <b>Actions</b> to <b>Read-only</b> (so the editor can tell you when the site has updated).</li>
-    <li>Click <b>Generate token</b>, copy it, and paste it here.</li>
-  </ol>
   <form id="signin-form" class="field">
-    <input id="token" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false" aria-label="GitHub token">
+    <input id="token" type="password" placeholder="Token" autocomplete="off" spellcheck="false" aria-label="GitHub token">
     <button class="btn primary" type="submit">Sign in</button>
   </form>
   <div id="signin-err" class="err"></div>
-  <p class="fine">The token is kept only in this browser. Sign out from the editor’s sidebar to remove it.</p>
 </div>
 
 <div id="shell" class="shell" hidden>

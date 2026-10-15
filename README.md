@@ -22,7 +22,7 @@ added to the address (e.g. `https://badeconomicshandbook.com/#editor-on`); `#edi
 repository through the GitHub API, one commit per **Publish**, which then rebuilds the site as above.
 
 - Sign-in uses a GitHub fine-grained token (this repository only; Contents: read and write, Actions:
-  read-only), kept in that browser's localStorage. The sign-in page explains how to make one.
+  read-only), kept in that browser's localStorage.
 - Unpublished edits are saved in the browser as a draft per page and come back when the page is reopened.
   If the page changed on GitHub in the meantime, the editor says so before anything is overwritten.
 - `editor/md.js` reads and writes the Markdown. A page opened and published without edits is unchanged

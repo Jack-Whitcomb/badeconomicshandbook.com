@@ -100,7 +100,7 @@ Perhaps your bar for scientific content is truly that high, and you would be wil
 
 [Rating: F-tier]{.rating .tier-f}
 
-Plenty of people have made claims to this effect; an example is here.[^n316] **Most of the time the arguments are weak. I will address a stronger and more qualified argument from Paul Krugman later.
+Plenty of people have made claims to this effect; an example is here.[^n316] Most of the time the arguments are weak. I will address a stronger and more qualified argument from Paul Krugman later.
 
 There are a few grounds on which this take is misleading. The first I will discuss is that what economists mean by rational is not as strict or unreasonable as what people expect. The second I will discuss is that economists *do* relax many assumptions of rationality, anyway. Criticisms did not go unheard. Some brief commentary will be made on the subject of competition as well.
 
@@ -198,7 +198,6 @@ I see no good reason to spend much more time on this issue. If you wish to see t
 
 [Rating: C-tier]{.rating .tier-c}
 
-*\*
 Paul Romer coined the term "mathiness" to point out a style of writing that "lets academic politics masquerade as science."[^n325] I've written this section not to point to any particular misapplication of mathiness, but to provide a warning about the concept.
 
 There is a natural appeal of the idea of mathiness to economists, but an even more natural appeal to people who are skeptical of economics. Once you have seen an economist deploy this idea, it is very easy to fall into the trap of believing *any* idea in economics that requires more than 5th grade algebra is sophistry designed to mystify the public and lend undeserved legitimacy to economics. This is especially easy to believe if the conclusion is counterintuitive or undesirable.

@@ -93,9 +93,6 @@ let build = null;            // {sha, state, url}
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  const tl = $("#token-link");
-  tl.href += "?" + new URLSearchParams({ name: "Book editor", description: "Web editor for badeconomicshandbook.com",
-    target_name: OWNER, expires_in: "366", contents: "write", actions: "read" });
   $("#signin-form").addEventListener("submit", async e => {
     e.preventDefault();
     const t = $("#token").value.trim();
