@@ -2,6 +2,7 @@
 // "Edit this page" (bottom of each page) is hidden from readers. To show it in your own browser,
 // open any page once with #editor-on at the end of the address; #editor-off hides it again.
 // The setting is remembered in that browser only.
+// The link opens this page in the site's own editor (editor/index.html) instead of GitHub's.
 (() => {
   const KEY = "bebh-editor";
   try {
@@ -9,5 +10,9 @@
     if (location.hash === "#editor-off") localStorage.removeItem(KEY);
     if (localStorage.getItem(KEY) === "1") document.documentElement.classList.add("editor-mode");
   } catch (e) { /* storage blocked: link stays hidden */ }
+  for (const a of document.querySelectorAll('.toc-actions a[href*="/edit/main/"]')) {
+    a.href = "/editor/#" + a.getAttribute("href").split("/edit/main/")[1];
+    a.removeAttribute("target");
+  }
 })();
 </script>

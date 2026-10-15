@@ -6,6 +6,7 @@ project:
   # doesn't resolve as a file, so copy them explicitly.
   resources:
     - images/ch01-purchasing-power.png
+    - editor/*   # the web editor (editor/index.html); copied as is
 
 book:
   title: "The Bad Economics Handbook"

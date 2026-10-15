@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Editor · The Bad Economics Handbook</title>
+<link rel="icon" href="../images/cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+
+<!-- Sign-in: a GitHub token that can write to the site's repository -->
+<div id="signin" class="signin" hidden>
+  <h1>The Bad Economics Handbook</h1>
+  <p class="lede">Editor</p>
+  <p>To save changes, this editor needs a GitHub token that can edit the website's repository. You only do this once per browser.</p>
+  <ol>
+    <li>Open <a id="token-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub’s new-token page</a> (signed in as Jack-Whitcomb).</li>
+    <li>Give it any name. Under <b>Repository access</b>, pick <b>Only select repositories</b> and choose <b>badeconomicshandbook.com</b>.</li>
+    <li>Under <b>Permissions → Repository permissions</b>, set <b>Contents</b> to <b>Read and write</b>, and <b>Actions</b> to <b>Read-only</b> (so the editor can tell you when the site has updated).</li>
+    <li>Click <b>Generate token</b>, copy it, and paste it here.</li>
+  </ol>
+  <form id="signin-form" class="field">
+    <input id="token" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false" aria-label="GitHub token">
+    <button class="btn primary" type="submit">Sign in</button>
+  </form>
+  <div id="signin-err" class="err"></div>
+  <p class="fine">The token is kept only in this browser. Sign out from the editor’s sidebar to remove it.</p>
+</div>
+
+<div id="shell" class="shell" hidden>
+  <aside id="side" class="side">
+    <a class="side-title" href="../">The Bad Economics Handbook</a>
+    <div class="side-sub">Editor</div>
+    <ul id="pages" class="pages"></ul>
+    <div class="side-foot">
+      <a id="gh-link" class="linkbtn" target="_blank" rel="noopener">Open this page on GitHub</a>
+      <button id="help-btn" class="linkbtn" type="button">Keyboard shortcuts</button>
+      <button id="signout" class="linkbtn" type="button">Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="bar">
+      <button id="menu-btn" class="tb menu-btn" type="button" title="Pages" aria-label="Pages">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2.5 4h11M2.5 8h11M2.5 12h11"/></svg>
+      </button>
+      <div class="tools" id="tools">
+        <button class="tb serif" data-cmd="bold" type="button" title="Bold (Ctrl+B)"><b>B</b></button>
+        <button class="tb serif" data-cmd="italic" type="button" title="Italic (Ctrl+I)"><i>I</i></button>
+        <button class="tb serif" data-cmd="superscript" type="button" title="Superscript">x<sup style="font-size:.6em">2</sup></button>
+        <button class="tb" data-cmd="link" type="button" title="Link (Ctrl+K)" aria-label="Link">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.6 9.4a2.6 2.6 0 0 0 3.7 0l2.4-2.4a2.6 2.6 0 0 0-3.7-3.7l-.9.9"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.9-.9"/></svg>
+        </button>
+        <button class="tb" data-cmd="note" type="button" title="Add a footnote at the cursor (Ctrl+Shift+F)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 12.5h7M3 9.5h10"/><path d="M11.5 2v5M9 4.5h5"/></svg>Note
+        </button>
+        <span class="sep"></span>
+        <button class="tb" data-cmd="undo" type="button" title="Undo (Ctrl+Z)" aria-label="Undo">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5 2.5 6.5l3 3"/><path d="M2.5 6.5h7a3.5 3.5 0 0 1 0 7H7"/></svg>
+        </button>
+        <button class="tb" data-cmd="redo" type="button" title="Redo (Ctrl+Shift+Z)" aria-label="Redo">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 3.5 3 3-3 3"/><path d="M13.5 6.5h-7a3.5 3.5 0 0 0 0 7H9"/></svg>
+        </button>
+      </div>
+      <div id="status" class="status"><span class="pip"></span><span class="txt"></span></div>
+      <a id="view-live" class="btn view-live" target="_blank" rel="noopener">View page</a>
+      <button id="publish" class="btn primary" type="button" disabled>Review &amp; publish</button>
+    </header>
+    <div id="banner" class="banner" hidden></div>
+    <main class="page"><article id="doc" class="doc"></article></main>
+  </div>
+</div>
+
+<dialog id="review"><div class="dlg" id="review-inner"></div></dialog>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="md.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>

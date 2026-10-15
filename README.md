@@ -8,11 +8,27 @@ Every push to the `main` branch (including saving an edit in GitHub's web editor
 `.github/workflows/publish.yml`, which builds the site with Quarto and publishes it to GitHub Pages.
 It usually goes live within about two minutes. Progress is shown in the repository's **Actions** tab.
 
-To edit a page: click **Edit this page** at the bottom of the page on the site (or open the `.qmd` file on
-GitHub and click the pencil icon), make the change, then **Commit changes**.
+To edit a page: click **Edit this page** at the bottom of the page on the site, or go to
+https://badeconomicshandbook.com/editor/. See "The web editor" below. You can still edit a `.qmd` file on
+GitHub directly (pencil icon, then **Commit changes**).
 
-"Edit this page" is hidden from readers. To show it in your browser, open any page once with `#editor-on`
+"Edit this page" opens the web editor and is hidden from readers. To show it in your browser, open any page once with `#editor-on`
 added to the address (e.g. `https://badeconomicshandbook.com/#editor-on`); `#editor-off` hides it again.
+
+## The web editor
+
+`editor/` is an editor for the pages, served with the site at `/editor/` (listed under `resources:` in
+`_quarto.yml` so Quarto copies it as is). It shows a page the way the site does and saves straight to this
+repository through the GitHub API, one commit per **Publish**, which then rebuilds the site as above.
+
+- Sign-in uses a GitHub fine-grained token (this repository only; Contents: read and write, Actions:
+  read-only), kept in that browser's localStorage. The sign-in page explains how to make one.
+- Unpublished edits are saved in the browser as a draft per page and come back when the page is reopened.
+  If the page changed on GitHub in the meantime, the editor says so before anything is overwritten.
+- `editor/md.js` reads and writes the Markdown. A page opened and published without edits is unchanged
+  byte for byte, and only the paragraphs you touch are rewritten. Anything it can't show as formatted text
+  (equations, tables, HTML) is edited as Markdown source in place.
+- New images are named `chNN-MM.png` (next free number) and uploaded with the page.
 
 ## Footnotes (endnotes)
 
