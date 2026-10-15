@@ -50,6 +50,8 @@ a { color: var(--link); }
 .side-sub { font-family: var(--ui); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: .3rem 0 1.1rem; font-weight: 650; }
 .pages { list-style: none; margin: 0; padding: 0; }
 .pages > li { margin-bottom: .2rem; }
+.pages > li.group { font-family: var(--ui); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 1rem 0 .3rem .4rem; }
+.pages > li.group:first-child { margin-top: 0; }
 .pages a.pg { display: block; font-size: .82rem; font-weight: 700; line-height: 1.3; padding: .32rem .4rem; border-radius: 5px; color: var(--text); text-decoration: none; }
 .pages a.pg:hover { background: var(--faint); }
 .pages a.pg.cur { color: var(--accent); background: var(--accent-soft); }
@@ -96,6 +98,8 @@ a { color: var(--link); }
 /* ---------- The page (matches the site) ---------- */
 .page { padding: 2rem 16px 40vh; }
 .doc { max-width: 720px; margin: 0 auto; position: relative; }
+.book-tag { display: inline-block; font-family: var(--ui); font-size: .68rem; font-weight: 650; letter-spacing: .08em; text-transform: uppercase;
+  color: #fff; background: #b71c1c; padding: .15rem .55rem; border-radius: 999px; }
 .doc .title { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin: .5rem 0 1.4rem; outline: none; }
 .doc p, .doc li { line-height: 1.6; }
 .doc p { margin: 0 0 1rem; }

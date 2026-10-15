@@ -1,0 +1,93 @@
+---
+title: "Search results"
+search: false
+comments: false
+---
+
+<!-- Full list of search hits. The sidebar search box sends Enter here (search-enter.html).
+     Uses ?query= because Quarto reserves ?q= (it highlights and then strips it). -->
+
+<form id="sr-form" class="sr-form" action="search.html" method="get">
+<input id="sr-q" name="query" type="search" placeholder="Search the book" aria-label="Search the book">
+</form>
+
+<p id="sr-summary" class="sr-summary"></p>
+<div id="sr-results"></div>
+
+```{=html}
+<script>
+(async () => {
+  const q = (new URLSearchParams(location.search).get("query") || "").trim();
+  const input = document.getElementById("sr-q");
+  const summary = document.getElementById("sr-summary");
+  const out = document.getElementById("sr-results");
+  input.value = q;
+  if (!q) { input.focus(); return; }
+  document.title = `${q} - Search results`;
+
+  // Accent- and case-insensitive matching; every word must appear in the section.
+  const fold = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const terms = [...new Set(fold(q).split(/\s+/).filter(Boolean))];
+  const esc = s => s.replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  // One result per Take (or per page / endnotes list). Quarto's index splits some sections
+  // in two, and files a chapter's Take 1 under the page itself, so merge by destination.
+  const sections = new Map();
+  for (const e of await (await fetch("search.json")).json()) {
+    if (e.href === "search.html") continue;
+    let text = e.text || "", href = e.href, label = e.section || e.title;
+    const take = !e.section && text.match(/^Take (\d+): [^\n]*/);
+    if (href.endsWith("#footnotes")) label = "Endnotes";
+    else if (take && !href.includes("#")) { href += `#take-${take[1]}`; label = take[0]; }
+    if (text.startsWith(label)) text = text.slice(label.length);   // drop the repeated heading
+    const s = sections.get(href);
+    if (s) { s.text += "\n" + text; if (!/^Take \d+:/.test(s.label)) s.label = label; }
+    else sections.set(href, {href, label, page: e.title, text});
+  }
+
+  const hits = [];
+  for (const sec of sections.values()) {
+    const text = sec.text.trim(), body = fold(text), head = fold(sec.label);
+    if (!terms.every(t => body.includes(t) || head.includes(t))) continue;
+    hits.push({...sec, text, body});
+  }
+
+  summary.textContent = hits.length
+    ? `${hits.length} ${hits.length === 1 ? "section matches" : "sections match"} “${q}”`
+    : `No results for “${q}”`;
+
+  // Show the text around the first few matches, with the search words highlighted.
+  const phrase = terms.length > 1 ? [reEsc(fold(q).replace(/\s+/g, " "))] : [];
+  const mark = new RegExp(phrase.concat(terms.map(reEsc)).join("|"), "gi");
+  const snippets = (text, body) => {
+    const spots = [];
+    for (const t of terms) {
+      let i = body.indexOf(t);
+      while (i !== -1 && spots.length < 12) { spots.push(i); i = body.indexOf(t, i + t.length); }
+    }
+    spots.sort((a, b) => a - b);
+    const picked = [];
+    for (const i of spots) if (!picked.length || i - picked[picked.length - 1] > 160) picked.push(i);
+    return picked.slice(0, 3).map(i => {
+      const a = Math.max(0, text.lastIndexOf(" ", Math.max(0, i - 80)));
+      const b = text.indexOf(" ", Math.min(text.length, i + 120));
+      const piece = text.slice(a, b === -1 ? text.length : b).replace(/\s+/g, " ").replace(/↩︎/g, "").trim();
+      return (a > 0 ? "…" : "") + esc(piece).replace(mark, m => `<mark>${m}</mark>`) + (b !== -1 ? "…" : "");
+    });
+  };
+
+  // Group by page, in book order; within a page, sections keep their order.
+  let lastPage = null, html = "";
+  for (const {href, label, page, text, body} of hits) {
+    if (page !== lastPage) {
+      html += `<h2 class="sr-page">${esc(page)}</h2>`;
+      lastPage = page;
+    }
+    html += `<div class="sr-hit"><a class="sr-link" href="${esc(href)}">${esc(label)}</a>` +
+      snippets(text, body).map(s => `<p class="sr-snip">${s}</p>`).join("") + `</div>`;
+  }
+  out.innerHTML = html;
+})();
+</script>
+```

@@ -1,0 +1,60 @@
+---
+title: 'Introduction'
+subtitle: '*Why?*'
+body-classes: why-subtitle
+---
+
+Immigration hurts wages. Inflation is corporate greed. Tariffs are paid by foreigners. There is no housing shortage. If you know anything about politics, chances are that you've heard one of these ideas before. They're what this book is all about.
+
+Why should a book be written about bad economics, and why should you read such a book? Many ideas in this book have made appearances in major publications like The Wall Street Journal[^n1] and The Washington Post.[^n2] Public officials as high in stature as the president regurgitate and believe in them. Bad economics, if it has influence, means bad policy, and bad policies hurt people. The point of this book is to vaccinate you against nonsense, and help the passionate economics sleuth argue back against bad ideas and outright lies.
+
+There are three big ideas which I think explain much of the public disagreement over economics, and they should be used as a lens through which to view many of the claims discussed in this book. First, many arguments form a "motte and bailey," where the initial claim carries a much stronger meaning than what the speaker is capable of defending. When challenged, they'll tend to pivot to an easier point to avoid admitting they had misled anyone. You'll see this pattern emerge frequently in this book.
+
+To some degree, this kind of issue is inevitable. I often prefer to simplify my own views when discussing them, and the lost details can sometimes lead to problems. If I say "rent control is bad," that could be challenged by arguing "but aren't there versions of the policy that haven't caused the harms suggested by textbooks?", and I would be forced to agree. "Aha! Misleading much?"
+
+But if, instead of that, I said "Forcing landlords to charge a price that is below the equilibrium price can cause shortages if the policy is not narrowly tailored, and the less-harmful versions of the policy only ignore the supply constraints that lie at the heart of the problem of scarce housing\..." my public life would be slow and painful. Most people wouldn't bother waiting for me to finish my long and winding sentences. To some degree, removing details is necessary for communication.
+
+But sometimes it's clear that someone is just being misleading. For example, this article[^n3] claims that "One study[^n4] of rent control in New Jersey---a state with a rich history of embracing rent control---found that, over three decades, rent control *increased* housing supply (though this was largely attributed to landlords slicing up larger units into smaller ones)." But in the full text of that study, the author states the following:
+
+> "Moderate rent control in New Jersey stands as symbolic rather than distributional reform. Our research suggests that the pressure of real estate groups, government, and the courts has made **modern-day rent control laws toothless in terms of their impact on rents.** A similar finding has been found in southern California (Heskin et al., 2000). About the only measurable impact is that landlords may have cleverly reduced the size of rental units to create more units and profit in rent control cities. At best, it appears that most rent control ordinances have only succeeded in preventing rent increases that are excessive."
+
+Thus, a study that doesn't disprove the textbook model was twisted to make a point about the textbook model being wrong. They even cite another study[^n5] that they claim shows rent controls don't affect housing supply, and in the full text, the authors state "it is important when analyzing the success of rent control ordinances to keep in mind that rent controls implemented in places like New Jersey are relatively mild in nature---sometimes even symbolic." Framing is powerful.
+
+Another source of disagreement comes from distrust between groups of people, which is sometimes so strong that conspiratorial thinking can be used as a backstop against changing opinions. To many people there is *us* and *them*, with their own interests and values and biases, and any information from *them* is suspect. Twice now I've encountered people who ignore data on account of it being from the "regime," which would never publish information that makes it look bad. (The government *does* frequently publish information that makes it look bad. All the time, even during the Trump administration.)
+
+Not much can be done about this kind of disagreement---if your opponent is convinced that any organization well-funded enough to collect data (like Our World in Data, YouGov, or the Bureau of Labor Statistics) is part of a larger ideological group that will naturally tend to fabricate the truth, they're stuck where they stand. For that reason, I'll be ignoring this type of gripe.
+
+Third, most people just don't have the time to think hard about economics, and aren't particularly interested in the truth. That's fine. Economists and others with an interest in the field shouldn't expect economics to receive special treatment. But public-facing officials and intellectuals do have a responsibility to not engage in this kind of laziness, so it's worth criticizing them for it.
+
+The concept of a lie is worth generalizing. Lies of varying degrees, including slightly misleading statements and genuine falsehoods, create expectations about the world that don't match the expectations one would have in view of the evidence. This is the essence of the motte-and-bailey argument. A speaker who claims that immigrants are a drain on the budget might be shown evidence that they are not, only to argue back by sharing a source finding that if you include the benefits received by the children of undocumented immigrants, *those* immigrants are a drain---perhaps not noticing that they have pivoted from individual immigrants in general to the households of undocumented immigrants. This is the nature of the modern political almost-lie, and it's why scientists value specificity so much. (Ask an economist why they use so much math.[^n6])
+
+Some of the claims addressed here are claims about what we *should* do, which makes them appear to fall outside the purview of economics. Economics deals with the tradeoffs of public policies, but can't tell you whether to make them. Why listen to economists when they tell you what the government *should* do?
+
+But the strength of this argument is limited by the plausibility of one's wish to make the tradeoff. To provide an exaggerated illustration, if economics tells you a policy will kill ten million people and save a few dollars in federal expenses, there is no obvious moral theory that would accommodate implementing such a policy. Sometimes, knowing how the world works is sufficient to know what the right thing to do is.
+
+Each take in this book is assigned a "tier" to provide a quick summary of its accuracy. These are fairly loosely assigned, but are useful to have:
+
+- **A-tier:** Correct.
+
+<!-- -->
+
+- **B-tier:** You can find economists with these views, and if you can't, they're at least loosely accurate or sensible. Included for the sake of discussing more extreme versions or for general interest.\
+  *Example: Raise the minimum wage.*
+
+- **C-tier:** Applied to misleading ideas that have a conceivable interpretation that isn't *factually* wrong or obviously a bad idea.\
+  *Example: Climate change is the fault of major corporations.*
+
+- **D-tier:** The most common tier. There may be an interpretation of this type of idea that isn\'t "wrong," but the typical person will be led to believe something likely false in view of available evidence on the matter. Many of these ideas can easily be converted to B-tier ideas with more precise language.
+
+- **F-tier:** Very wrong ideas. Mental gymnastics is required to defend them, and practically nobody with familiarity with the subject believes these things.\
+  *Example: It was easier to get by in the past.*
+
+- **Super F:** Applied to ideas that are false in such a way that one would need to be immune to new evidence to keep believing them.\
+  *Example: Economists invented inflation. We could print as much money as we'd like.*
+
+[^n1]: [wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097?gaa...](https://www.wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097?gaa_at=eafs&gaa_n=AWEtsqfZNZ7yUf29i0S-IcdnTs3WqcwuwdlSLU6zckXmkHUIhM8QoLAwBq64dOtWtgw%3D&gaa_ts=69d13e18&gaa_sig=m5wAgF-Rug3WCWoffCmwcLt6y6bNHGwhiwIl1x6axH-UU1G8KsVl8-rjTelUTdS-zTIrUQXrE57gzQmWSvJ9tw%3D%3D)
+[^n2]: [washingtonpost.com/business/2025/11/29/poverty-line-green/](https://www.washingtonpost.com/business/2025/11/29/poverty-line-green/)
+[^n3]: [prospect.org/2023/05/16/2023-05-16-economists-hate-rent-control/](https://prospect.org/2023/05/16/2023-05-16-economists-hate-rent-control/)
+[^n4]: [onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9906.2007.00334.x](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9906.2007.00334.x)
+[^n5]: [sciencedirect.com/science/article/abs/pii/S0264275115001122](https://www.sciencedirect.com/science/article/abs/pii/S0264275115001122)
+[^n6]: [noahpinionblog.blogspot.com/2012/10/what-is-math-and-why-should-we-...](https://noahpinionblog.blogspot.com/2012/10/what-is-math-and-why-should-we-use-it.html)

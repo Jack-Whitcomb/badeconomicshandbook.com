@@ -30,6 +30,13 @@ repository through the GitHub API, one commit per **Publish**, which then rebuil
   (equations, tables, HTML) is edited as Markdown source in place.
 - New images are named `chNN-MM.png` (next free number) and uploaded with the page.
 
+## Snark mode
+
+`snark/` is a second, separate copy of the book (pages, images and its own `_quarto.yml`), published at
+`/snark/`. The "Snark mode" switch on each homepage links between the two. The copy shares the theme and
+scripts in the main folder but nothing else: editing a page in one version doesn't change the other. The
+web editor lists both versions. Build it locally with `quarto render snark` after `quarto render`.
+
 ## Footnotes (endnotes)
 
 On the site, notes are numbered automatically, starting from 1 on each page, in the order they appear.

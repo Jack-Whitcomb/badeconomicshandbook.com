@@ -16,7 +16,8 @@ SECTION = re.compile(r'<section id="([^"]+)" class="level2[^"]*">\s*<h2[^>]*>(.*
 ITEM = re.compile(r'(<a href="([^"#]+\.html)" class="sidebar-item-text sidebar-link[^"]*">.*?</a>\s*</div>)'
                   r'(?:\s*<ul class="sidebar-takes">.*?</ul>)?', re.S)
 
-pages = sorted(OUT.rglob("*.html"))
+# snark/ is the Snark mode copy of the book, a separate project with its own sidebar (it runs this script too)
+pages = sorted(p for p in OUT.rglob("*.html") if p.relative_to(OUT).parts[0] != "snark")
 sections = {}
 for page in pages:
     found = SECTION.findall(page.read_text(encoding="utf-8"))

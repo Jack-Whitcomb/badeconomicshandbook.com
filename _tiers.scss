@@ -70,3 +70,13 @@ h2.sr-page { font-size: 1.25rem; margin-top: 2rem; }
 /* "Edit this page": hidden unless this browser has editor mode on (editor-mode.html) */
 .toc-actions { display: none; }
 .editor-mode .toc-actions { display: block; }
+
+/* "Snark mode" switch on the homepage: links between the normal book and the copy in /snark/ */
+.snark-switch { display: inline-flex; align-items: center; gap: .55rem; margin-top: .9rem; font-family: system-ui, sans-serif;
+  font-size: .9rem; color: inherit !important; text-decoration: none; }
+.snark-track { position: relative; width: 2.3rem; height: 1.3rem; border-radius: 999px; background: rgba(128,128,128,.4); transition: background .15s; flex: none; }
+.snark-track::after { content: ""; position: absolute; top: .15rem; left: .15rem; width: 1rem; height: 1rem; border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .15s; }
+.snark-switch[aria-checked="true"] .snark-track { background: #b71c1c; }
+.snark-switch[aria-checked="true"] .snark-track::after { transform: translateX(1rem); }
+.snark-switch:hover .snark-track { filter: brightness(1.1); }

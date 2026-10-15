@@ -1,0 +1,87 @@
+# Snark mode: a separate copy of the book, built to /snark/ (see README). Shares the theme and scripts
+# in the folder above; everything else (pages, images) is its own copy.
+project:
+  type: book
+  output-dir: ../_book/snark
+  post-render: ../tools/sidebar_takes.py
+  # Table images are referenced with a ?v= version tag (see tools/convert.py), which Quarto
+  # doesn't resolve as a file, so copy them explicitly.
+  resources:
+    - images/ch01-purchasing-power.png
+
+book:
+  title: "The Bad Economics Handbook"
+  site-url: https://badeconomicshandbook.com/snark
+  repo-url: https://github.com/Jack-Whitcomb/badeconomicshandbook.com
+  repo-branch: main
+  repo-subdir: snark
+  repo-actions: [edit]
+  subtitle: "A guide to the worst ideas about immigration, trade, the budget, and more"
+  author: "Jack Whitcomb"
+  favicon: images/cover.jpg
+  search:
+    location: sidebar
+    type: textbox
+  page-navigation: true
+  sidebar:
+    style: docked
+    collapse-level: 1
+    tools:
+      - icon: substack
+        href: https://jackonomics.substack.com
+        text: Substack
+      - icon: twitter-x
+        href: https://x.com/jack_whitcomb_
+        text: X
+  page-footer:
+    center: |
+      © 2026 Jack Whitcomb. Text: all rights reserved.
+      Illustrations created by the author: [CC0](/about.qmd#license) (free to use for anything).
+  chapters:
+    - index.qmd
+    - introduction.qmd
+    - chapters/01-living-standards.qmd
+    - chapters/02-housing.qmd
+    - chapters/03-labor-economics.qmd
+    - chapters/04-inflation-monetary-policy-interest-and-prices.qmd
+    - chapters/05-gdp-and-growth.qmd
+    - chapters/06-climate-change-and-energy.qmd
+    - chapters/07-the-budget.qmd
+    - chapters/08-international-trade.qmd
+    - chapters/09-miscellaneous-bullshit.qmd
+    - chapters/00-general-claims-about-economists-and-economics.qmd
+    - appendix.qmd
+    - about.qmd
+    - search.qmd   # full search results; hidden from the sidebar by tools/sidebar_takes.py
+
+# Reader comments (Giscus): stored in the repository's Discussions, "Comments" category.
+# Readers sign in with GitHub to comment. One discussion per page, created on the first comment.
+comments:
+  giscus:
+    repo: Jack-Whitcomb/badeconomicshandbook.com
+    repo-id: R_kgDOVG2ZHg
+    category: Comments
+    category-id: DIC_kwDOVG2ZHs4DIS9E
+    mapping: pathname
+    reactions-enabled: true
+    input-position: top
+    loading: lazy
+    theme:
+      light: light
+      dark: dark
+
+language:
+  search-text-placeholder: "Search the book"
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../theme.scss]
+      dark: [cosmo, ../theme-dark.scss]
+    number-sections: false
+    toc: false
+    include-after-body: [../sidebar-takes.html, ../search-enter.html, ../editor-mode.html]
+    footnotes-hover: true
+    link-external-newwindow: true
+    link-external-icon: false
+    smooth-scroll: true

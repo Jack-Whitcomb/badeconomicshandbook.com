@@ -83,7 +83,7 @@ let pages = [];              // [{path, title}]
 let cur = null;              // {path, title, baseSha, origText, doc}
 const units = new Map();     // unit id -> {u, b}
 const pendingImages = new Map();   // repo path -> {b64, url}
-let imageNames = null;       // names in images/ on GitHub (loaded when needed)
+const imageNames = new Map(); // book ("" or "snark/") -> names in its images/ folder on GitHub (loaded when needed)
 let undoStack = [], redoStack = [];
 let clip = null;             // last copy: {text, md}, so footnotes and formatting survive paste
 let build = null;            // {sha, state, url}
@@ -129,25 +129,28 @@ async function start() {
   $("#shell").hidden = false;
   $("#doc").replaceChildren(h("div", { class: "loading" }, "Loading the book…"));
   try {
-    const yml = await getFile("_quarto.yml");
-    const paths = [];
-    let inChapters = false;
-    for (const line of yml.text.split("\n")) {
-      if (/^\s*chapters:/.test(line)) { inChapters = true; continue; }
-      if (inChapters) {
-        const m = /^\s*-\s+(\S+\.qmd)/.exec(line);
-        if (m) { if (m[1] !== "search.qmd") paths.push(m[1]); }
-        else if (/^\S/.test(line) || /^\s*[a-z-]+:/.test(line)) inChapters = false;
+    // The normal book, then the Snark mode copy in snark/ (a separate Quarto project), if there is one
+    pages = [];
+    for (const book of ["", "snark/"]) {
+      let yml;
+      try { yml = await getFile(book + "_quarto.yml"); } catch (e) { if (book && e.status === 404) continue; throw e; }
+      let inChapters = false;
+      for (const line of yml.text.split("\n")) {
+        if (/^\s*chapters:/.test(line)) { inChapters = true; continue; }
+        if (inChapters) {
+          const m = /^\s*-\s+(\S+\.qmd)/.exec(line);
+          if (m) { if (m[1] !== "search.qmd") pages.push({ path: book + m[1], book, title: m[1] === "index.qmd" ? "Home" : m[1].replace(/^.*\//, "").replace(/\.qmd$/, "") }); }
+          else if (/^\S/.test(line) || /^\s*[a-z-]+:/.test(line)) inChapters = false;
+        }
       }
     }
-    pages = paths.map(p => ({ path: p, title: p === "index.qmd" ? "Home" : p.replace(/^.*\//, "").replace(/\.qmd$/, "") }));
     renderPageList();
     // Titles, in the background
     Promise.all(pages.map(async pg => {
       try {
         const f = await getFile(pg.path);
         const t = MD.parseDoc(f.text).title;
-        if (t && pg.path !== "index.qmd") pg.title = t.text;
+        if (t && !pg.path.endsWith("index.qmd")) pg.title = t.text;
       } catch (e) { /* keep the file name */ }
     })).then(renderPageList);
     route();
@@ -167,12 +170,14 @@ function route() {
 
 function renderPageList() {
   const ul = $("#pages");
-  ul.replaceChildren(...pages.map(pg => {
+  const twoBooks = pages.some(pg => pg.book);
+  ul.replaceChildren(...pages.flatMap((pg, i) => {
+    const group = twoBooks && (i === 0 || pages[i - 1].book !== pg.book) ? h("li", { class: "group" }, pg.book ? "Snark mode" : "Normal") : null;
     const li = h("li", {},
       h("a", { class: "pg" + (cur && cur.path === pg.path ? " cur" : ""), href: "#" + pg.path, onclick: () => $("#side").classList.remove("open") },
         pg.title, store.get(DRAFT_KEY + pg.path) ? h("span", { class: "dot", title: "Unpublished changes" }) : null));
     if (cur && cur.path === pg.path) li.append(outlineEl());
-    return li;
+    return group ? [group, li] : [li];
   }));
 }
 
@@ -221,11 +226,12 @@ async function openPage(path) {
 
 function loadText(text) {
   cur.doc = MD.parseDoc(text);
-  cur.title = cur.path === "index.qmd" ? "Home" : (cur.doc.title ? cur.doc.title.text : cur.path);
+  cur.title = (cur.path.endsWith("index.qmd") ? "Home" : (cur.doc.title ? cur.doc.title.text : cur.path)) + (bookOf(cur.path) ? " (Snark mode)" : "");
   renderDoc();
 }
 
-function pageUrl(path) { return SITE + (path === "index.qmd" ? "" : path.replace(/\.qmd$/, ".html")); }
+function bookOf(path) { return path.startsWith("snark/") ? "snark/" : ""; }
+function pageUrl(path) { return SITE + (path.endsWith("index.qmd") && !path.slice(bookOf(path).length).includes("/") ? bookOf(path) : path.replace(/\.qmd$/, ".html")); }
 function when(t) {
   const d = new Date(t), now = new Date();
   const time = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
@@ -246,6 +252,7 @@ function renderDoc() {
   units.clear();
   const doc = $("#doc");
   const kids = [];
+  if (bookOf(cur.path)) kids.push(h("div", { class: "book-tag" }, "Snark mode"));
   if (cur.doc.title) {
     const t = h("h1", { class: "title", contenteditable: "plaintext-only", spellcheck: "true", "data-ph": "Title" }, cur.doc.title.text);
     t.addEventListener("input", () => { cur.doc.title.text = t.textContent.replace(/\s+/g, " ").trim(); afterChange(); });
@@ -406,22 +413,23 @@ function pickImage(cb) {
 
 async function stageImage(file) {
   if (file.size > 8 * 1024 * 1024) { toast("That image is over 8 MB. Please shrink it first."); return null; }
-  if (!imageNames) {
+  const book = bookOf(cur.path);
+  if (!imageNames.has(book)) {
     // The new file's name must not match an existing image, so don't guess if the list can't be read
-    try { imageNames = (await gh(repo(`/contents/images?ref=${BRANCH}`))).map(f => f.name); }
+    try { imageNames.set(book, (await gh(repo(`/contents/${book}images?ref=${BRANCH}`))).map(f => f.name)); }
     catch (e) { toast("Couldn’t check the existing images on GitHub, so the image wasn’t added. Try again."); return null; }
   }
   const m = /chapters\/(\d+)-/.exec(cur.path);
   const prefix = m ? "ch" + m[1] : cur.path.replace(/^.*\//, "").replace(/\.qmd$/, "").replace(/^introduction$/, "intro");
-  const taken = imageNames.concat([...pendingImages.keys()].map(p => p.split("/").pop()));
+  const taken = imageNames.get(book).concat([...pendingImages.keys()].filter(p => bookOf(p) === book).map(p => p.split("/").pop()));
   let n = 0;
   for (const name of taken) { const mm = new RegExp(`^${prefix}-(\\d+)\\.`).exec(name); if (mm) n = Math.max(n, +mm[1]); }
   const ext = ({ "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp", "image/svg+xml": "svg" })[file.type] || "png";
   const name = `${prefix}-${String(n + 1).padStart(2, "0")}.${ext}`;
   const buf = new Uint8Array(await file.arrayBuffer());
   let bin = ""; for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
-  pendingImages.set("images/" + name, { b64: btoa(bin), url: URL.createObjectURL(file) });
-  return (cur.path.includes("/") ? "../" : "") + "images/" + name;
+  pendingImages.set(book + "images/" + name, { b64: btoa(bin), url: URL.createObjectURL(file) });
+  return "../".repeat(cur.path.slice(book.length).split("/").length - 1) + "images/" + name;
 }
 
 async function replaceImage(b, file) {
@@ -1501,7 +1509,7 @@ function openReview() {
     while (j < g.add.length) hk.append(plus(g.add[j++]));
     body.append(hk);
   }
-  const images = [...pendingImages.keys()].filter(p => text.includes(p.split("/").pop()));
+  const images = usedImages(text, cur.path);
   if (images.length) body.append(h("p", { class: "warnbox" }, `New image${images.length > 1 ? "s" : ""} to upload: ${images.join(", ")}`));
   const missing = $$("#doc .fn.missing").map(c => c.dataset.label);
   if (missing.length) body.append(h("p", { class: "warnbox" }, `Footnote marker${missing.length > 1 ? "s" : ""} without note text: ${missing.join(", ")}. ${missing.length > 1 ? "They" : "It"} will show as a broken number on the site.`));
@@ -1516,7 +1524,12 @@ function openReview() {
   pub.focus();
 }
 
-function shortTitle() { return (cur.title || cur.path).replace(/^(Chapter \d+):.*$/, "$1"); }
+// New images waiting to be uploaded that this page's text uses
+function usedImages(text, path) {
+  return [...pendingImages.keys()].filter(p => bookOf(p) === bookOf(path) && text.includes("images/" + p.split("/").pop()));
+}
+
+function shortTitle() { return (cur.title || cur.path).replace(/^(Chapter \d+):.*?( \(Snark mode\))?$/, "$1$2"); }
 
 async function doPublish(text, message, body, foot, force) {
   const page = cur;
@@ -1533,8 +1546,8 @@ async function doPublish(text, message, body, foot, force) {
       try { remoteSha = (await gh(repo(`/contents/${encPath(page.path)}?ref=${head}`))).sha; } catch (e) { if (e.status !== 404) throw e; }
       if (remoteSha !== page.baseSha && !force) { s1.fail(); conflict(page, text, message, body, foot); return; }
       const entries = [{ path: page.path, mode: "100644", type: "blob", content: text }];
-      for (const [p, img] of pendingImages) {
-        if (!text.includes(p.split("/").pop())) continue;
+      for (const p of usedImages(text, page.path)) {
+        const img = pendingImages.get(p);
         const blob = await gh(repo("/git/blobs"), { method: "POST", body: { content: img.b64, encoding: "base64" } });
         entries.push({ path: p, mode: "100644", type: "blob", sha: blob.sha });
       }
@@ -1547,7 +1560,7 @@ async function doPublish(text, message, body, foot, force) {
     s1.ok();
     // The page as GitHub now has it is our new starting point
     const f = await getFile(page.path, commitSha);
-    for (const p of [...pendingImages.keys()]) if (text.includes(p.split("/").pop())) { imageNames && imageNames.push(p.split("/").pop()); pendingImages.delete(p); }
+    for (const p of usedImages(text, page.path)) { if (imageNames.has(bookOf(p))) imageNames.get(bookOf(p)).push(p.split("/").pop()); pendingImages.delete(p); }
     page.origText = f.text; page.baseSha = f.sha;
     store.del(DRAFT_KEY + page.path);
     renderPageList();
