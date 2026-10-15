@@ -76,11 +76,19 @@ This claim is usually accompanied by data like housing per capita, shown below.
 
 Shared by Jon Brooks,[^n54] this data was accompanied with the caption "Everyone keeps saying America has a 'housing shortage.' It doesn't. Divide total homes by population and you get this: We've never had more housing per person than we do right now. The problem isn't supply. It's prices."
 
-I admit that calling the current situation a "housing shortage" is somewhat imprecise. There is no shortage of housing in Gary, Indiana, where the average home value appears to have fallen below \$100k.[^n55] Homes like that, built in less-desirable locations with less-valuable job opportunities, are counted in statistics describing total housing units per capita. This is a pretty severe issue for the argument being made with the graph above. We don't care so much that housing is abundant and cheap in places people don't want to live.
+Yes, calling the current situation a "housing shortage" is imprecise. There's no shortage of housing in Gary, Indiana, where the average home value appears to have fallen below \$100k.[^n55] Homes like that, built in less-desirable locations with less-valuable job opportunities, are counted in statistics describing total housing units per capita. But nobody wants to move to Gary (sorry, Gary residents), so this is a silly way to measure the accessibility of housing. We want housing where the job opportunities are.
 
-When economists talk about a housing shortage in America, what they're really referencing is the tendency for American cities to enforce regulations that prevent supply from meeting demand at the lower price that would prevail in a free(er) market. The most common and derided form of regulation is zoning. These regulations prevent developers from building denser forms of housing on the land they own, and with fewer units built, fewer people can live in a city, and if fewer people can live in a city, only the richest few will live there. They bid up the price of the scarce units, and you get a housing shortage.
+In general, when economists talk about a housing shortage in America, what they're talking about is the tendency for American cities to enforce regulations that prevent supply from meeting demand at the lower price that would prevail in a free(er) market. The most common and derided form of regulation is zoning. These regulations prevent developers from building denser forms of housing on the land they own, and with fewer units built, fewer people can live in a city, and if fewer people can live in a city, only the richest few will live there. They bid up the price of the scarce units, and you get a housing shortage.
 
-It's easy to see this story playing out in San Francisco, which has long enforced zoning laws that require the construction of single-family homes over denser multi-family units. An illustration from Maps Mania[^n56] makes this very clear, showing how apartment buildings were illegal to build in 73.5% of San Francisco in 2019; sadly it must be excluded here since it is illegible in black and white.
+This should be really, really obvious, but for some reason housing breaks people's brains and prevents them from intuiting the effects of engineering a shortage. It's like if we required every apple sold in America to be 5 inches in diameter and encrusted in a thin sheet of gold, and then people got mad when economists suggested, "hey, maybe requiring every apple to be ginormous and wrapped in gold is making them cost a lot more?" Don't you economists care about ensuring Americans have large, high-quality apples??? But there are people who seem to genuinely be under the impression that unless the government steps in to mandate infinite single-family homes, developers won't decide to build neighborhoods of single-family homes:
+
+{{< tweet https://x.com/JMooreP3/status/1837681601691766873 >}}
+
+{{< tweet https://x.com/HerotodusAlive/status/1837756835778166956 >}}
+
+If you and a bunch of other people want to live in a neighborhood of single-family homes, developers will recognize that and sell you such a neighborhood if you're willing and able to pay for it. They can buy out the land and build the housing. That's how the markets for air travel, shoes, cars, and just about everything else work: businesses notice people are willing and able to pay for higher-quality versions of the thing and sell it voluntarily. An equivalent law for air travel would make it illegal to sell economy tickets on flights and erase the ability of poor people to go on vacation. Nobody would pass a law like that because it's obviously an idiotic idea.
+
+It's easy to see this story playing out in San Francisco, which has long enforced zoning laws that require the construction of single-family homes over denser multi-family units. An illustration from Maps Mania[^n56] makes this very clear, showing how apartment buildings were illegal to build in 73.5% of San Francisco in 2019. The vast majority of land is likewise zoned single-family in Los Angeles.[^n97]
 
 Does building more housing solve this problem? Yes. It has been tried. Austin, Texas, has outbuilt the rest of the US:[^n57]
 
@@ -96,15 +104,15 @@ The same thing has happened in Auckland, New Zealand:[^n59]
 
 ![](../images/ch02-06.png){width="95%"}
 
-These cities are exceptional, unfortunately. Zoning continues to choke housing supply in cities across America. It is this phenomenon in the cities people wish to live in that economists refer to as a housing shortage, rather than a lack of homes in general.
+Of course, cities like Austin and Auckland are the exceptions, and most cities seem hell-bent on pushing prices as high as possible. Most Americans seem to want changes to housing regulations that enable more construction,[^n98] but the American mind is an enigma, so I suspect this issue is gonna drag on for a while.
 
 ## Take 3: Building new, luxury housing displaces people. {#take-3}
 
 [Rating: D-tier]{.rating .tier-d}
 
-When a shortage occurs, and money is used to allocate the scarce good to people, the people with the most money will typically be among the first to acquire the scarce good. That applies to housing just as well as other goods. So when a shortage occurs, we shouldn't be surprised when luxurious units are built---they are the kinds of units wealthy people can afford, and desire. People then confuse what is caused by the shortage with the cause of the shortage itself. A shortage triggers "gentrification," and people judge that gentrification itself is what prices people out of the neighborhood.
+When a shortage occurs, and money is used to allocate the scarce good to people, the people with the most money will typically be among the first to acquire the scarce good. That applies to housing just as well as other goods. So when a shortage occurs, we shouldn't be surprised when luxurious units are built---they're the kinds of units wealthy people are willing and able to pay for. (If it were illegal for car companies to sell more than 1,000 cars each year, do you think they'd be more likely to be luxury vehicles or Honda Civics?) People then confuse what is caused by the shortage with the cause of the shortage itself. A shortage triggers "gentrification," and people judge that gentrification itself is what prices people out of the neighborhood.
 
-In its weaker form, this take is just a confusion of correlation for causation, as I described. It's clear enough that that could be the mistake. But it's also possible that new, luxury units change the character of a neighborhood in such a way that the neighborhood becomes more desirable, boosting demand and pricing out previous residents.
+In its weaker form, this take is just a confusion of correlation for causation, but it's also possible that new, luxury units change the character of a neighborhood in such a way that the neighborhood becomes more desirable, boosting demand and pricing out previous residents. It seems pretty straightforwardly implausible that this effect wouldn't usually be large enough to explain gentrification, but God hates economists, so he made everyone's intuitions as stupid as possible, and now we're gonna have to try to resolve this issue with applied micro.
 
 To eliminate our confusion, what we'd like to see is some random variation in the presence of luxury units, unrelated to whether supply is constrained, and see if the introduction of those units affects rents. If one of two otherwise comparable neighborhoods has new luxury units built, does rent decline there compared to the other neighborhood, or rise? Researchers Brian J. Asquith, Evan Mast, and Davin Reed have a paper[^n60] that tries to answer this question. Here is the abstract:
 
@@ -221,9 +229,11 @@ There are many cities in the United States that have basically made population g
 [^n54]: [x.com/jonbrooks/status/2017070272546054510/photo/1](https://x.com/jonbrooks/status/2017070272546054510/photo/1)
 [^n55]: [zillow.com/home-values/45401/gary-in/](https://www.zillow.com/home-values/45401/gary-in/)
 [^n56]: [googlemapsmania.blogspot.com/2019/01/solving-san-franciscos-housing...](https://googlemapsmania.blogspot.com/2019/01/solving-san-franciscos-housing-crisis.html)
+[^n97]: [belonging.berkeley.edu/single-family-zoning-greater-los-angeles](https://belonging.berkeley.edu/single-family-zoning-greater-los-angeles)
 [^n57]: Chart based on: [morehousing.substack.com/p/austin](https://morehousing.substack.com/p/austin)
 [^n58]: Chart based on: [vox.com/future-perfect/485295/austin-national-rents-declining-yimby](https://www.vox.com/future-perfect/485295/austin-national-rents-declining-yimby)
 [^n59]: [morehousing.substack.com/p/auckland](https://morehousing.substack.com/p/auckland)
+[^n98]: [cato.org/blog/poll-59-americans-favor-building-more-housing-their-n...](https://www.cato.org/blog/poll-59-americans-favor-building-more-housing-their-neighborhood)
 [^n60]: [research.upjohn.org/up\_workingpapers/316/](https://research.upjohn.org/up_workingpapers/316/)
 [^n61]: [lewis.ucla.edu/research/market-rate-development-impacts/](https://lewis.ucla.edu/research/market-rate-development-impacts/)
 [^n62]: [factcheck.org/2025/12/vances-misleading-claims-on-housing-prices-an...](https://www.factcheck.org/2025/12/vances-misleading-claims-on-housing-prices-and-illegal-immigration/)
