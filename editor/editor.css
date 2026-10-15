@@ -257,3 +257,7 @@ dialog::backdrop { background: rgba(0,0,0,.35); }
   .status .txt { display: none; }
 }
 @media (max-width: 576px) { html { font-size: 16px; } .bar .view-live { display: none; } }
+
+/* Posts from X (shown with X's own script, as on the site) */
+.k-tweet .tweet-box { min-height: 3rem; }
+.k-tweet .twitter-tweet { margin-left: auto !important; margin-right: auto !important; }

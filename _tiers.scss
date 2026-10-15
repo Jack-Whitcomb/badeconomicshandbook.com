@@ -80,3 +80,8 @@ h2.sr-page { font-size: 1.25rem; margin-top: 2rem; }
 .snark-switch[aria-checked="true"] .snark-track { background: #b71c1c; }
 .snark-switch[aria-checked="true"] .snark-track::after { transform: translateX(1rem); }
 .snark-switch:hover .snark-track { filter: brightness(1.1); }
+
+/* Embedded posts from X (tools/tweet.lua): centered; before X's script draws the card (or if it's blocked), a quote */
+.tweet-embed { margin: 1.5rem 0; }
+.tweet-embed .twitter-tweet { margin-left: auto !important; margin-right: auto !important; }
+.tweet-embed blockquote.twitter-tweet { max-width: 550px; }

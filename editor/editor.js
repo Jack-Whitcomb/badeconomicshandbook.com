@@ -45,6 +45,7 @@ const ICON = {
   ol: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M7 4.5h6M7 11.5h6M3 3l1-.5v4M2.6 9.5c.4-.6 1.8-.6 1.8.4 0 .8-1.8 1.6-1.8 2.6h1.9"/></svg>',
   img: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="m2.5 11 3.5-3.5 3 3 2-2 2.5 2.5"/></svg>',
   star: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="m8 2 1.8 3.8 4.2.5-3.1 2.9.8 4.1L8 11.3l-3.7 2 .8-4.1L2 6.3l4.2-.5z"/></svg>',
+  x: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg>',
   code: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 4.5-3 3.5 3 3.5M10.5 4.5l3 3.5-3 3.5"/></svg>',
 };
 
@@ -271,7 +272,7 @@ function renderBlock(b) {
     el = renderTextBlock(b);
     if (!el) { b.code = true; el = null; }   // didn't survive a round trip: edit as Markdown
   }
-  if (!el) el = b.kind === "image" ? renderImage(b) : b.kind === "rating" ? renderRating(b) : renderRaw(b);
+  if (!el) el = b.kind === "image" ? renderImage(b) : b.kind === "tweet" ? renderTweet(b) : b.kind === "rating" ? renderRating(b) : renderRaw(b);
   el.dataset.bid = b.id;
   el.prepend(h("div", { class: "gut", contenteditable: "false" },
     h("button", { class: "handle", type: "button", title: "Move, change or delete", "aria-label": "Block options", html: ICON.grip, onclick: e => blockMenu(b, e.currentTarget) })));
@@ -450,6 +451,67 @@ async function insertImageAfter(after, file) {
   afterChange();
   nb.el.scrollIntoView({ block: "center", behavior: "smooth" });
   toast("Image added. Use “Alt text” on the image to describe it.");
+}
+
+/* ---------- posts from X ---------- */
+
+// "https://twitter.com/a/status/1?s=20" → "https://x.com/a/status/1"; null if it isn't a link to a post
+function tweetUrl(v) {
+  const m = /^(?:https?:\/\/)?(?:www\.|mobile\.)?(?:x|twitter)\.com\/(\w+)\/status(?:es)?\/(\d+)/i.exec(v.trim());
+  return m ? `https://x.com/${m[1]}/status/${m[2]}` : null;
+}
+
+let twttrLoad = null;
+function loadTwttr() {
+  return twttrLoad = twttrLoad || new Promise((ok, fail) => {
+    const sc = h("script", { src: "https://platform.twitter.com/widgets.js", async: "" });
+    sc.onload = () => window.twttr && twttr.ready ? twttr.ready(ok) : fail();
+    sc.onerror = () => { twttrLoad = null; fail(); };
+    document.head.append(sc);
+  });
+}
+
+function renderTweet(b) {
+  const url = tweetUrl(b.url) || b.url;
+  const box = h("div", { class: "tweet-box" }, h("div", { class: "img-missing" }, "Loading the post from X…"));
+  const dark = document.documentElement.dataset.theme === "dark" ||
+    (document.documentElement.dataset.theme !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+  const failed = why => box.replaceChildren(h("div", { class: "img-missing" }, why, " ",
+    h("a", { href: url, target: "_blank", rel: "noopener" }, url.replace(/^https:\/\//, ""))));
+  const id = (/\/status\/(\d+)/.exec(url) || [])[1];
+  if (!id) failed("This isn’t a link to a post on X:");
+  else loadTwttr().then(() => twttr.widgets.createTweet(id, box, { dnt: true, theme: dark ? "dark" : "light", align: "center" }))
+    .then(el => { if (el) box.firstChild.remove(); else failed("X wouldn’t show this post (deleted, private, or blocked). On the site it will appear as a link:"); })
+    .catch(() => failed("Couldn’t load X’s preview (maybe a blocker). The post will still be on the site:"));
+  const tools = h("div", { class: "img-tools", contenteditable: "false" },
+    h("button", { type: "button", onclick: e => tweetPop(e.currentTarget, b.url, v => { checkpoint(); b.url = v; b.dirty = true; rerender(b); afterChange(); }) }, "Change link"));
+  return h("div", { class: "blk k-image k-tweet" }, h("figure", {}, box, tools));
+}
+
+function tweetPop(anchor, value, done) {
+  const input = h("input", { type: "url", value: value || "", placeholder: "https://x.com/someone/status/…", "aria-label": "Link to the post" });
+  const err = h("div", { class: "help" }, "Paste the link to the post (Share → Copy link).");
+  const apply = () => {
+    const v = tweetUrl(input.value);
+    if (!v) { err.textContent = "That doesn’t look like a link to a post on X. It should contain “/status/” followed by a number."; input.focus(); return; }
+    closePop();
+    if (v !== value) done(v);
+  };
+  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); apply(); } });
+  openPop(anchor, h("div", { class: "form" },
+    h("div", { class: "head" }, "Post from X"),
+    input, err,
+    h("div", { class: "row" }, h("span", { class: "grow" }), h("button", { class: "btn", type: "button", onclick: closePop }, "Cancel"), h("button", { class: "btn primary", type: "button", onclick: apply }, "Add post"))));
+  input.focus();
+}
+
+function insertTweetAfter(after, url) {
+  checkpoint();
+  const nb = MD.makeBlock(`{{< tweet ${url} >}}`, [""]);
+  nb.dirty = true;
+  insertBlock(nb, after);
+  afterChange();
+  nb.el.scrollIntoView({ block: "center", behavior: "smooth" });
 }
 
 /* ---------- ratings ---------- */
@@ -671,7 +733,7 @@ function blockMenu(b, anchor) {
     const curKind = b.kind === "list" ? (/^\d/.test(b.items[0].marker) ? "ol" : "ul") : b.kind;
     for (const [k, ic, label] of opts) if (k !== curKind) items.push(menuItem(ic, label, () => convertBlock(b, k)));
   }
-  if (b.kind !== "image" && b.kind !== "rating") items.push(h("hr"), menuItem("code", "Edit as Markdown", () => codeEdit(b)));
+  if (b.kind !== "image" && b.kind !== "rating" && b.kind !== "tweet") items.push(h("hr"), menuItem("code", "Edit as Markdown", () => codeEdit(b)));
   items.push(h("hr"), menuItem("trash", "Delete", () => deleteBlock(b), "danger"));
   openPop(anchor, h("div", { class: "menu" }, items), { side: "right" });
   anchor.closest(".gut").classList.add("open");
@@ -686,7 +748,8 @@ function addMenu(after, anchor) {
     menuItem("quote", "Quote", () => addNew(after, "quote")),
     menuItem("ul", "Bulleted list", () => addNew(after, "ul")),
     menuItem("ol", "Numbered list", () => addNew(after, "ol")),
-    menuItem("img", "Image…", () => addNew(after, "image"))), { side: "right" });
+    menuItem("img", "Image…", () => addNew(after, "image")),
+    menuItem("x", "Post from X…", () => tweetPop(anchor, "", url => insertTweetAfter(after, url)))), { side: "right" });
   anchor.classList.add("open");
 }
 

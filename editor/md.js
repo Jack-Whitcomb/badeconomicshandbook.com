@@ -318,6 +318,7 @@ function classify(raw) {
   if (lines.length === 1) {
     if ((m = /^(#{1,6})[ \t]+(.*?)((?:[ \t]+\{[^{}]*\})?)$/.exec(f))) return { kind: "heading", level: m[1].length, attrs: m[3], units: [unit(m[2])] };
     if ((m = RATING.exec(f))) return { kind: "rating", label: m[1], tier: m[2] };
+    if ((m = /^\{\{< tweet (\S+) >\}\}$/.exec(f))) return { kind: "tweet", url: m[1] };
     const img = parseImage(f);
     if (img) return Object.assign({ kind: "image" }, img);
   }
@@ -357,6 +358,7 @@ function blockMd(b, unitMd) {
     case "heading": return "#".repeat(b.level) + " " + unitMd(b.units[0]) + b.attrs;
     case "rating": return `[Rating: ${b.label}]{.rating .tier-${b.tier}}`;
     case "image": return imageMd(b);
+    case "tweet": return `{{< tweet ${b.url} >}}`;
     case "quote": return b.units.map(u => unitMd(u).split("\n").map(l => "> " + l).join("\n")).join("\n>\n");
     case "list": return b.items.map(it => it.units.map((u, k) => {
       const def = " ".repeat(it.marker.length);

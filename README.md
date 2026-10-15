@@ -52,6 +52,15 @@ number in the print edition when the site was made). Names never need renumberin
 
 (Print edition: `add_endnotes.py` and `remove_endnotes.py` in the book folder do the same for the `.odt`.)
 
+## Posts from X (tweets)
+
+A line on its own like `{{< tweet https://x.com/SenWarren/status/2026510714123247789 >}}` embeds that post.
+In the web editor: **+ → Post from X…** and paste the link (twitter.com links and `?s=20` endings are fine).
+`tools/tweet.lua` (listed under `shortcodes:` in both `_quarto.yml` files) fetches the post's text from X
+when the site is built and writes it into the page, so if X's script is blocked or the post is later
+deleted, readers still see the text as a quote. If the post can't be fetched at build time, the build log
+shows a warning and the page gets a plain link. The card follows the site's light/dark switch.
+
 ## Folder layout
 
 - `_quarto.yml`: site settings (title, sidebar, chapter list, comments, footer)
