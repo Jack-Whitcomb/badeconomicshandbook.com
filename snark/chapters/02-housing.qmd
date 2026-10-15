@@ -118,7 +118,9 @@ To eliminate our confusion, what we'd like to see is some random variation in th
 
 > "We study the local effects of new market-rate housing in low-income areas using microdata on large apartment buildings, rents, and migration. New buildings decrease nearby rents by 5 to 7 percent relative to locations slightly farther away or developed later, and they increase in-migration from low-income areas. Results are driven by a large supply effect---we show that new buildings absorb many high-income households---that overwhelms any offsetting endogenous amenity effect. The latter may be small because most new buildings go into already-changing areas. Contrary to common concerns, new buildings slow local rent increases rather than initiate or accelerate them."
 
-Here is a review of six working papers.[^n61] The relevant excerpt: "Five find that market-rate housing makes nearby housing more affordable across the income distribution of rental units, and one finds mixed results." Thus, the Asquith, Mast, and Reed result does not appear to be a fluke. This claim is thus mostly false. In theory, it is conceivable that building luxury units could displace people through effects on demand, but the evidence does not point in that direction.
+Here is a review of six working papers.[^n61] The relevant excerpt: "Five find that market-rate housing makes nearby housing more affordable across the income distribution of rental units, and one finds mixed results." Thus, the Asquith, Mast, and Reed result does not appear to be a fluke.
+
+As Bob Hall once said, "Your evidence is strong, but my prior is stronger," so this is definitely not gonna change many hearts and minds. But if you want to be part of the cool kids club of sweaty econ nerds like me, you should avoid complaining about gentrification and complain about zoning laws instead.
 
 ## Take 4: Institutional investors, Airbnb, illegal immigrants, and foreign buyers make housing expensive. {#take-4}
 
