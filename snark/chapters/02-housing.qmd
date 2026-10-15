@@ -152,6 +152,8 @@ Notice that the map is very dark in desirable urban areas like San Francisco and
 
 ![](../images/ch02-12.png){width="90%" fig-alt="Pictured: the online left's plan for homelessness in America"}
 
+(Pictured: the terminally online plan for homelessness in America.)
+
 Aside from the fact that it would be morally questionable to deport homeless people to the most undesirable locations in America, it would also violate the Takings Clause to expropriate unused housing units, so in practice, this policy would just look like a big subsidy for decrepit housing and transportation services. I think you should just build housing where the homeless people are.
 
 Returning to the institutional investors question: Memphis, Tennessee appears to be the city with the highest percentage of units owned by institutional investors at 19.2%.[^n81] That is far from a monopoly, or even a cartel, given that this count includes multiple institutional investors, not just one. It is more likely that institutional investors are simply managers of housing units, not consumers of housing units or scheming cartels.
