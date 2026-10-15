@@ -171,15 +171,13 @@ Writing this much about economics is difficult. If you think something contained
 
 While writing this, I thought: Am I asking too much of critics of economics? Am I asking them to give up on everything and become too soft to get anything done? Don't interpret what I'm saying that way. There is one question I would like people such as Jostein Hauge and Oren Cass to think about more often before arguing that economics can't be objective or isn't a science: Does this encourage learning, or discourage it? Does this make people cynical or smart?
 
-Pointing out issues with the field of economics can encourage learning and enhance our knowledge of the world. Consider this short essay by Rob Henderson[^n354] that appeared in the Wall Street Journal's *Free Expression* newsletter, "Social Science Has a Replication Problem." I will provide an excerpt (though the article is so short that you should just read it):
+Pointing out issues with the field of economics can encourage learning and enhance our knowledge of the world. Consider this short essay by Rob Henderson[^n354] that appeared in the Wall Street Journal's *Free Expression* newsletter, "Social Science Has a Replication Problem." I will provide an excerpt (though the article is so short that you should just read it); this is what he says after writing about a Nature report[^n355] finding a \~50% replication rate in the social sciences:
 
-> "A new report[^n355] in Nature discusses the results of a seven-year project called Systematizing Confidence in Open Research and Evidence, or Score, which aimed to evaluate the replicability of 3,900 social science papers. Researchers who reran these studies could only reproduce about half of the results. \[\...\]
->
-> Skepticism about replication isn't the only way people avoid engaging with research. Consider hindsight bias,[^n356] or the tendency to believe we already knew something once we heard it. It shows up in a familiar way. You describe a research finding. Someone replies, 'Did we really need a study for that?' The implication is that researchers waste time studying things that are obvious.\
+> "Skepticism about replication isn't the only way people avoid engaging with research. Consider hindsight bias,[^n356] or the tendency to believe we already knew something once we heard it. It shows up in a familiar way. You describe a research finding. Someone replies, 'Did we really need a study for that?' The implication is that researchers waste time studying things that are obvious.\
 >
 > But 'obvious' is a slippery idea. It often means little more than this: I can come up with a story that fits the result after I've heard it."
 
-He then provides an example about how easily World War I soldiers adjusted to their new conditions. A study found that soldiers from urban areas adjusted more easily. Seems obvious: they previously lived in more crowded conditions, so army life is easy to adjust to. But if they had found the opposite, we'd *still* say it was obvious: of course rural men, who lived in harsher conditions, had an easier time adjusting. He concludes the essay:
+He then provides an example about how easily World War II soldiers adjusted to their new conditions. A study found that soldiers from urban areas adjusted more easily. Seems obvious: they previously lived in more crowded conditions, so army life is easy to adjust to. But if they had found the opposite, we'd *still* say it was obvious: of course rural men, who lived in harsher conditions, had an easier time adjusting. He concludes the essay:
 
 > "Abandoning trust in research leaves us with our intuitions. And our intuitions are prone to systematic error. We are good at explaining things after they happen. We are much worse at predicting them in advance. Research, even when it fails, forces us to confront that gap."
 
@@ -211,5 +209,5 @@ I'm not naive. I know that there will always be a market for the rebellious hete
 [^n352]: [x.com/jack\_whitcomb\_](https://x.com/jack_whitcomb_)
 [^n353]: [jackonomics.substack.com/s/mistakes](https://jackonomics.substack.com/s/mistakes)
 [^n354]: [wsjfreeexpression.substack.com/p/social-science-has-a-replication](https://wsjfreeexpression.substack.com/p/social-science-has-a-replication)
-[^n355]: [urldefense.com/v3/\_\_https://www.nature.com/articles/d41586-026-0095...](https://urldefense.com/v3/__https://www.nature.com/articles/d41586-026-00955-5__;!!F0Stn7g!EAHkRJnncM1BFkSMk_ABUq04mcju61P5nkC0dlvFTbBGF3gApb2LSMw72U-rSKAH-QMHc96mYj5Q0gZ9rrXj$)
-[^n356]: [urldefense.com/v3/\_\_https://thedecisionlab.com/biases/hindsight-bia...](https://urldefense.com/v3/__https://thedecisionlab.com/biases/hindsight-bias__;!!F0Stn7g!EAHkRJnncM1BFkSMk_ABUq04mcju61P5nkC0dlvFTbBGF3gApb2LSMw72U-rSKAH-QMHc96mYj5Q0vNKYdJt$)
+[^n355]: [nature.com/articles/d41586-026-00955-5](https://www.nature.com/articles/d41586-026-00955-5)
+[^n356]: [thedecisionlab.com/biases/hindsight-bias](https://thedecisionlab.com/biases/hindsight-bias)

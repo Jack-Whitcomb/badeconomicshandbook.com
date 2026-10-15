@@ -150,7 +150,7 @@ So what is MMT, really? The biggest ideas in MMT appear fairly old and well-know
 
 > "If aggregate demand exceeds aggregate supply at full employment output the government should increase taxes or cutback government purchases or transfer payments. The increase in tax in this case is not to raise revenue but to decrease consumer demand by taking away buying power from consumers."
 
-Another idea contained in MMT, explained by Scott Fullwiler,[^n229] is that "For MMT'ers, concerns that a nation cannot 'afford' to put idle capacity to use through tax cuts or appropriately targeted spending are akin to a person with his/her shoes tied together concerned that he/she can't run." The constraints on the government's ability to spend, in a situation of high unemployment, are entirely legal, not real. That is essentially the picture received by macroeconomics students in introductory textbooks. Below, you can see a figure from Mankiw's *Macroeconomics* (8ed, pg. 422). It describes a situation in which the economy is below its natural level of output, with lots of unused resources, and where one could increase output with minimal impact on inflation by raising aggregate demand.
+Another idea contained in MMT, explained by Scott Fullwiler,[^n229] is that "For MMT'ers, concerns that a nation cannot 'afford' to put idle capacity to use through tax cuts or appropriately targeted spending are akin to a person with his/her shoes tied together concerned that he/she can't run." The constraints on the government's ability to spend, in a situation of high unemployment, are entirely legal, not real. That is essentially the picture received by macroeconomics students in introductory textbooks. Below, you can see a recreation of a figure from Mankiw's *Macroeconomics* (8ed, pg. 422). It describes a situation in which the economy is below its natural level of output, with lots of unused resources, and where one could increase output with minimal impact on inflation by raising aggregate demand.
 
 ![](../images/ch07-10.png){width="65%"}
 
@@ -205,7 +205,7 @@ So *please* support an "un-balanced budget amendment" instead. Professor Alex Ta
 [^n214]: [x.com/BernieSanders/status/1030590678559019008?s=20](https://x.com/BernieSanders/status/1030590678559019008?s=20)
 [^n215]: [jackonomics.substack.com/p/the-national-debt-and-the-big-beautiful](https://jackonomics.substack.com/p/the-national-debt-and-the-big-beautiful)
 [^n216]: [commonslibrary.parliament.uk/research-briefings/sn00724/](https://commonslibrary.parliament.uk/research-briefings/sn00724/)
-[^n217]: [ourworldindata.org/financing-healthcare](https://ourworldindata.org/financing-healthcare)
+[^n217]: [ourworldindata.org/financing-healthcare](https://ourworldindata.org/financing-healthcare) ; Our World in Data, CC BY 4.0, creativecommons.org/licenses/by/4.0.
 [^n218]: [ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipr...](https://ourworldindata.org/grapher/military-spending-as-a-share-of-gdp-sipri?tab=table)
 [^n219]: [en.wikipedia.org/wiki/List\_of\_countries\_by\_Human\_Development\_Index](https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index)
 [^n220]: [cato.org/blog/top-tax-rates-are-already-wrong-side-laffer-curve-lea...](https://www.cato.org/blog/top-tax-rates-are-already-wrong-side-laffer-curve-least-10-states)

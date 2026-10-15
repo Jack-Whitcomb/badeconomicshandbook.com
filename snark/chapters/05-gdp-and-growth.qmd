@@ -123,7 +123,7 @@ Take, for example, Angelo Mozilo. He was the CEO of Countrywide Financial, one o
 
 What happened to Mozilo in the end? Mostly nothing. He paid \$67.5 million in fines to the SEC, and was permanently banned from serving as an officer or director of a public company. Countrywide paid \$20 million of that fine, and Mozilo never admitted wrongdoing.
 
-While I would happily spend more time on this issue, I sense that you get the big picture. The Great Recession was not deliberately engineered by anyone in the financial sector. The financial crisis that lay at the heart of the recession was caused less by an organized group and more by large numbers of people handing out loans to people who posed a significant risk of default, and then making bank by selling ownership of these loans to others. They fabricated W-2s to make lending prospects look good.[^n185] Sadly, there is no single witch to burn in response to the crisis.
+While I would happily spend more time on this issue, I sense that you get the big picture. The Great Recession was not deliberately engineered by anyone in the financial sector. The financial crisis that lay at the heart of the recession was caused less by an organized group and more by large numbers of people handing out loans to people who posed a significant risk of default, and then making bank by selling ownership of these loans to others. Income usually wasn't checked at all; sometimes W-2s were fabricated.[^n185] Sadly, there's no single witch to burn in response to this.
 
 ## Take 7: Recessions are good, because they allow the economy to be pruned of bad investments. {#take-7}
 
@@ -145,7 +145,7 @@ I'm very uncertain about any conclusions that I can draw here, due to my lack of
 [^n159]: [ourworldindata.org/happiness-and-life-satisfaction](https://ourworldindata.org/happiness-and-life-satisfaction)
 [^n160]: [ourworldindata.org/co2-gdp-decoupling](https://ourworldindata.org/co2-gdp-decoupling)
 [^n161]: [ourworldindata.org/co2-emissions](https://ourworldindata.org/co2-emissions)
-[^n162]: [up.pt/arquivoweb/paginas.fe.up.pt/\_empe/arquivo\_pdf/Aluminum Bevera...](https://www.up.pt/arquivoweb/paginas.fe.up.pt/_empe/arquivo_pdf/Aluminum%20Beverage%20Can.pdf)
+[^n162]: Hosford & Duncan, "The Aluminum Beverage Can," Scientific American, September 1994.
 [^n163]: [geekspin.co/how-much-coke-cost-every-decade-since-1886/](https://geekspin.co/how-much-coke-cost-every-decade-since-1886/)
 [^n164]: [fred.stlouisfed.org/series/MEPAINUSA646N](https://fred.stlouisfed.org/series/MEPAINUSA646N)
 [^n165]: [ourworldindata.org/grapher/gdp-per-capita-maddison-project-database...](https://ourworldindata.org/grapher/gdp-per-capita-maddison-project-database?tab=line&country=PRK~KOR)
@@ -168,6 +168,6 @@ I'm very uncertain about any conclusions that I can draw here, due to my lack of
 [^n182]: [propublica.org/article/goldman-sachs-big-short-persuasive-emails-se...](https://www.propublica.org/article/goldman-sachs-big-short-persuasive-emails-senate-subcommittee)
 [^n183]: [publicintegrity.org/inequality-poverty-opportunity/the-roots-of-the...](https://publicintegrity.org/inequality-poverty-opportunity/the-roots-of-the-financial-crisis-who-is-to-blame/)
 [^n184]: [sec.gov/enforcement-litigation/litigation-releases/lr-21068a](https://www.sec.gov/enforcement-litigation/litigation-releases/lr-21068a)
-[^n185]: [archive.is/kWKiG](https://archive.is/kWKiG)
+[^n185]: see pgs. 160 and 164: [govinfo.gov/content/pkg/GPO-FCIC/pdf/GPO-FCIC.pdf](https://www.govinfo.gov/content/pkg/GPO-FCIC/pdf/GPO-FCIC.pdf)
 [^n186]: [res.org.uk/mediabriefing/the-cleansing-effect-of-recessions-average...](https://res.org.uk/mediabriefing/the-cleansing-effect-of-recessions-average-firm-productivity-is-boosted-but-by-less-when-financial-conditions-are-tight/#:~:text=Nevertheless%2C%20there%20is%20a%20still,issue%20of%20the%20Economic%20Journal.)
 [^n187]: [ideas.repec.org/a/ucp/jlabec/doi10.1086-682397.html](https://ideas.repec.org/a/ucp/jlabec/doi10.1086-682397.html)

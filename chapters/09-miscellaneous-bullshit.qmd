@@ -42,7 +42,7 @@ Balaji Srinivasan, a venture capitalist and former CTO of cryptocurrency trading
 
 The US has been a democracy (or at least not a dictatorship, given that women and minorities were excluded for a long time while white men received broad democratic rights) for more than two centuries, and has steadily developed into one of the richest countries in the world. When we turn to cases of hyperinflation in the past, we see common patterns of political disorder and dictatorship. Robert Mugabe had total control of Zimbabwe's government, and greatly expanded the money supply to bribe his enemies and reward his allies.[^n272] An episode of hyperinflation also occurred in Venezuela not long after the takeover of Nicolas Maduro, taking the reins of a former democracy that autocratized under Hugo Chavez. Countries that have experienced hyperinflation have tended to be much less politically stable, and much poorer, than the United States, and the root cause has fairly consistently been the printing of huge amounts of money. Like this insanely large Venezuelan note:[^n273]
 
-![](../images/ch09-01.png){width="93%"}
+![](../images/ch09-01.png){width="75%"}
 
 It is true that autocracy is not a prerequisite of hyperinflation. The Weimar Republic in Germany also had an episode of hyperinflation with the same cause (a greatly increased money supply). There is some disagreement[^n274] over why Weimar officials chose to do this, but none of the available reasoning suggests that hyperinflation could occur in the modern United States in the near future. There are no reparations the United States is being required to pay. Nobody has invaded an important industrial area[^n275] of the United States to seize wealth for said reparations, and the federal government does not plan to print money to pay workers pushed out of said region by said invasion.
 
@@ -196,7 +196,7 @@ There is nothing mysterious about bullshit jobs. Graeber, like many outside of t
 
 ## Take 9: The median income is skewed. {#take-9}
 
-***Rating: "To those of you who received honors, awards, and distinctions, I say, well done. And to the C students I say, you, too, can be president of the United States." -- George H.W. Bush***
+***Rating: "To those of you who received honors, awards, and distinctions, I say, well done. And to the C students I say, you, too, can be president of the United States." -- George W. Bush***
 
 This belongs in [Chapter 1](01-living-standards.qmd), but it feels too silly to include there.
 
@@ -208,11 +208,11 @@ If the poorest 49% of people are *very* poor, and the guy in the middle is someh
 
 Actually, I *do* have a decent idea, because some people might not notice when you specify that we're talking about the median *earner*. If you include the unemployed and those not in the labor force (mostly in education or retired), you get the distribution shown below, where the median is "skewed" because a lot of people don't earn anything at all.
 
-![](../images/ch09-06.png){width="79%"}
+![](../images/ch09-06.png){width="81%"}
 
-I tip my hat to Felpix, who created this chart,[^n295] and to Ryan Radia,[^n296] who has shared a version with earners only that uses hourly earnings. It's shown below. Note that the axes are swapped, so a "skewed median" would show up as a sudden jump to the right once the line is about to hit 0.50 on the vertical axis.
+I tip my hat to Felpix, who created the original of this chart,[^n295] and to Ryan Radia,[^n296] who shared a version with earners only that uses hourly earnings, replicated below. Note that the axes are swapped, so a "skewed median" would show up as a sudden jump to the right once the line is about to hit 0.50 on the vertical axis.
 
-![](../images/ch09-07.png){width="76%"}
+![](../images/ch09-07.png){width="88%"}
 
 There's no sudden jump. It's a smooth increase from the lowest earnings to the highest. Please stop saying that the median is skewed.
 
@@ -225,7 +225,7 @@ There's no sudden jump. It's a smooth increase from the lowest earnings to the h
 [^n270]: [pmc.ncbi.nlm.nih.gov/articles/PMC4098799/](https://pmc.ncbi.nlm.nih.gov/articles/PMC4098799/)
 [^n271]: [x.com/balajis/status/1636797265317867520?s=20](https://x.com/balajis/status/1636797265317867520?s=20)
 [^n272]: [mru.org/courses/principles-economics-macroeconomics/zimbabwe-curren...](https://mru.org/courses/principles-economics-macroeconomics/zimbabwe-currency-inflation)
-[^n273]: [coinworld.com/news/paper-money/hyperinflation-leads-to-new-high-den...](https://www.coinworld.com/news/paper-money/hyperinflation-leads-to-new-high-denomination-bank-notes-in-venezuela)
+[^n273]: Image: Wikimedia Commons (public domain, Banco Central de Venezuela). [commons.wikimedia.org/wiki/File:Ven500000Av2018.jpg](https://commons.wikimedia.org/wiki/File:Ven500000Av2018.jpg)
 [^n274]: [en.wikipedia.org/wiki/Hyperinflation\_in\_the\_Weimar\_Republic#Causes](https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic#Causes)
 [^n275]: [theholocaustexplained.org/the-nazi-rise-to-power/the-weimar-republi...](https://www.theholocaustexplained.org/the-nazi-rise-to-power/the-weimar-republic/invasion-of-the-ruhr/)
 [^n276]: [x.com/BadEconTakes/status/1249433462710218753](https://x.com/BadEconTakes/status/1249433462710218753)
@@ -245,7 +245,7 @@ There's no sudden jump. It's a smooth increase from the lowest earnings to the h
 [^n290]: [fred.stlouisfed.org/series/LRAC25FEUSM156S](https://fred.stlouisfed.org/series/LRAC25FEUSM156S)
 [^n291]: [jurisdigital.com/research/49-percent-research-before-hiring-lawyer](https://jurisdigital.com/research/49-percent-research-before-hiring-lawyer)
 [^n292]: [bls.gov/cex/pumd\_data.htm#csv](https://www.bls.gov/cex/pumd_data.htm#csv)
-[^n293]: [kufunda.net/publicdocs/George J. Borjas - Labor Economics-McGraw-Hi...](https://www.kufunda.net/publicdocs/George%20J.%20Borjas%20-%20Labor%20Economics-McGraw-Hill%20%282016%29.pdf)
-[^n294]: [kufunda.net/publicdocs/George J. Borjas - Labor Economics-McGraw-Hi...](https://www.kufunda.net/publicdocs/George%20J.%20Borjas%20-%20Labor%20Economics-McGraw-Hill%20%282016%29.pdf)
+[^n293]: George J. Borjas, Labor Economics, 7th ed. (McGraw-Hill, 2016).
+[^n294]: George J. Borjas, Labor Economics, 7th ed. (McGraw-Hill, 2016).
 [^n295]: [x.com/felpix\_/status/2042814583883055343?s=20](https://x.com/felpix_/status/2042814583883055343?s=20)
 [^n296]: [x.com/RyanRadia/status/1984405764522582036?s=20](https://x.com/RyanRadia/status/1984405764522582036?s=20)

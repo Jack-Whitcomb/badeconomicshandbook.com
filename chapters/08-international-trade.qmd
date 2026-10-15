@@ -10,7 +10,7 @@ The incidence of tariffs, like the incidence of any tax, depends on the relative
 
 To provide a simple analogy, imagine your name is John America, and you arrive at a market with many sellers. If you decide that anyone selling you something must pay a tariff of \$1, and communicate this to the sellers, they will simply raise all of their prices by \$1 to cover the cost of the tariff. If you forbid them from doing this, they will simply refuse to sell you anything. They have many other buyers they can turn to.
 
-Of course, it's possible that the US has market power and can avoid such a predicament, so we need to perform empirical checks. "The Impact of the 2018 Tariffs on Prices and Welfare"[^n233] provides a good illustration of how this works. First, here is the theoretical description as a supply and demand graph they provided:
+Of course, it's possible that the US has market power and can avoid such a predicament, so we need to perform empirical checks. "The Impact of the 2018 Tariffs on Prices and Welfare"[^n233] provides a good illustration of how this works. First, here is the theoretical description as a recreation of a supply and demand graph they provided:
 
 ![](../images/ch08-01.png){width="75%"}
 
@@ -172,11 +172,11 @@ To summarize, while there are theoretical reasons to suspect a negative impact o
 [^n248]: [imf.org/-/media/files/publications/wp/2019/wp1909.pdf](https://www.imf.org/-/media/files/publications/wp/2019/wp1909.pdf)
 [^n249]: [nber.org/papers/w33100](https://www.nber.org/papers/w33100)
 [^n250]: [politico.com/news/2025/04/02/trump-tariff-trade-partners-liberation...](https://www.politico.com/news/2025/04/02/trump-tariff-trade-partners-liberation-day-00267350)
-[^n251]: [archive.ph/Tl0Lq](https://archive.ph/Tl0Lq)
+[^n251]: [wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097](https://www.wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097)
 [^n252]: [stlouisfed.org/on-the-economy/2025/dec/look-at-us-services-export-t...](https://www.stlouisfed.org/on-the-economy/2025/dec/look-at-us-services-export-trends)
 [^n253]: The chart is based on the one on this page: [aei.org/carpe-diem/worried-about-trade-deficits-dont-they-are-job-g...](https://www.aei.org/carpe-diem/worried-about-trade-deficits-dont-they-are-job-generating-foreign-investment-surpluses-for-a-better-america/)
 [^n254]: [aei.org/carpe-diem/worried-about-trade-deficits-dont-they-are-job-g...](https://www.aei.org/carpe-diem/worried-about-trade-deficits-dont-they-are-job-generating-foreign-investment-surpluses-for-a-better-america/)
-[^n255]: [archive.ph/Tl0Lq](https://archive.ph/Tl0Lq)
+[^n255]: [wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097](https://www.wsj.com/economy/trade/why-trump-is-right-about-tariffs-3cad4097)
 [^n256]: [fred.stlouisfed.org/series/OPHMFG](https://fred.stlouisfed.org/series/OPHMFG)
 [^n257]: [fred.stlouisfed.org/series/MFGPROD](https://fred.stlouisfed.org/series/MFGPROD)
 [^n258]: [cep.lse.ac.uk/pubs/download/dp0272.pdf](https://cep.lse.ac.uk/pubs/download/dp0272.pdf)
