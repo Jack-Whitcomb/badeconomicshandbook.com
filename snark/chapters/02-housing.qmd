@@ -148,7 +148,9 @@ If we look at a map of vacancy rates in the US,[^n80] shown below, we can see th
 
 ![](../images/ch02-07.png){width="95%"}
 
-Notice that the map is very dark in desirable urban areas like San Francisco and New York City, and brighter in open rural areas with few urban centers. So there are plentiful vacant units, but they mostly aren't in the places people want to live. This pattern is consistent with vacancy rates being determined by competition for desirable units, rather than institutional investors holding units vacant in desirable locations to drive up prices.
+Notice that the map is very dark in desirable urban areas like San Francisco and New York City, and brighter in open rural areas with few urban centers. So there are plentiful vacant units, but they mostly aren't in the places people want to live. This pattern is consistent with vacancy rates being determined by competition for desirable units, rather than institutional investors holding units vacant in desirable locations to drive up prices. This is probably the map you want to bring up if you ever run into the "there are more vacant homes than homeless people!" crowd.
+
+![](../images/ch02-12.png){width="90%" fig-alt="Pictured: the online left's plan for homelessness in America"}
 
 Memphis, Tennessee appears to be the city with the highest percentage of units owned by institutional investors at 19.2%.[^n81] That is far from a monopoly, or even a cartel, given that this count includes multiple institutional investors, not just one. It is more likely that institutional investors are simply managers of housing units, not consumers of housing units or scheming cartels.
 
