@@ -12,6 +12,6 @@ From the tariff and immigration policies of Donald Trump to the misguided notion
 
 [Start reading](introduction.qmd){.start-btn}
 
-[[]{.snark-track}Snark mode](snark/){.snark-switch role="switch" aria-checked="false"}
+[[]{.snark-track}Snark mode](snark/){.snark-switch .no-external role="switch" aria-checked="false"}
 :::
 :::
