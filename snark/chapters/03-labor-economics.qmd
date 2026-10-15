@@ -36,6 +36,8 @@ The larger point of addressing this take and the previous one is not to provide 
 
 [Rating: D-tier]{.rating .tier-d}
 
+One day, a microeconomics teacher was sitting around, twisting his nipples and jerking off like usual, when he got the bright idea of presenting immigration economics to students by only modeling shifts in supply and ignoring demand. This made a lot of labor economists very angry and has been widely regarded as a bad move by anyone with an IQ above room temperature.
+
 While I admit that some forms of this take can be correct, the usual form it takes is so expansive and generalized that it must depend on completely absurd assumptions about how the world works. The proper response is to simply point out that immigrants do not just receive wages, they *spend* them, and when wages are spent on goods and services, demand for labor to produce those goods and services goes up. In theory, that cancels out the effect of labor supply on the wage, at least partially. Generally speaking, that is what we have observed in real life. The chart below is from Aubry et al. (2022).[^n100] Estimates of the effect of immigration on native-born wages tend to be negative but very close to zero.
 
 ![](../images/ch03-03.png){width="95%"}
