@@ -4,6 +4,22 @@ title: "About this edition"
 
 This is the free web edition of *The Bad Economics Handbook* by Jack Whitcomb. A print edition is also available.
 
+**AI notice**
+
+AI was not used in the writing of the textual content of the introduction, chapters, or appendix. Some citations, such as for licenses, were written by Claude Opus 5.5. Claude was also used to create and reproduce charts and other illustrations. Diffusion models, like Midjourney, were not used in the creation of any of this book's illustrations. Claude was also used for the sake of identifying some sources; in those cases, I have done my best to make sure the cited work has the claimed relevance to avoid problems caused by hallucinations. (Some sources are far too extensive for it to be practically reasonable to examine in entirety. For example, I cited a government report on bad lending practices when discussing the financial crisis. That report is hundreds of pages long and contains only two sentences considered relevant to the explanation being given.)
+
+**Copyright notice**
+
+The Bad Economics Handbook\
+Copyright © 2026 Jack Whitcomb. All rights reserved.\
+First edition, October 2026.
+
+Image credits and licenses are provided in the endnotes. Many figures were redrawn from other sources and have approximated values.
+
+This book is commentary and not financial or legal advice. If you are considering a lawsuit because my repeated revisions to avoid copyright violations missed something important, please reconsider. You should imagine me as a small, frail Victorian child.
+
+The free version is available at badeconomicshandbook.com. If the bullshit is contained in this book rather than outside it, you are not entitled to financial compensation, but may send me strongly worded emails via badeconomicshandbook@gmail.com.
+
 ## License {#license}
 
 **Text:** © 2026 Jack Whitcomb. All rights reserved. You're welcome to quote short passages with a link back to this site.
