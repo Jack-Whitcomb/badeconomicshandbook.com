@@ -77,6 +77,8 @@ I am a big believer in the idea that if you are gonna leave people to choose whe
 
 [Rating: F-tier]{.rating .tier-f}
 
+In some people's minds, the Federal Reserve seems to be a magical entity. Employees of America's central bank sit around with an infinite money printer that is always turned on for Da Billyanayrs, and if it wasn't for how psychopathically evil the economists who run the place are, we would all be living in 5,000-square-foot single-family homes with two-car garages, a pool, and a Hispanic maid we pretend to care about by talking about how terrible it is that people like her are brought here to be exploited by being paid twice as much as they were in Mexico.
+
 The quick response to this take is simple. The real interest rate on a loan is approximately equal to the nominal rate, written on paper, minus the rate of inflation. This is known as the Fisher equation. Intuitively, if you are lent \$100 and must pay back \$110, you can pay back the loan at no *real* interest if money gets cheaper. If inflation turns a \$100 sale for your business into a \$110 sale, it is easy to see the Fisher equation logic in play.
 
 If the Federal Reserve cuts interest rates to make housing more affordable, that will typically raise the rate of inflation. As a consequence, the real interest rate on a mortgage will remain unchanged, because lenders will be forced to raise the nominal rate they charge to cover the extra inflation.
@@ -88,6 +90,8 @@ It is difficult to illustrate this relationship empirically, since the Federal R
 ![](../images/ch04-05.png){width="100%"}
 
 It is thus easy to see how the opposite holds as well, with inflation tending to rise when interest rates are cut. With a higher rate of inflation, banks would be inclined to charge higher nominal rates.
+
+None of this is to say that cutting rates to make housing more affordable isn't an option. It's totally an option! But it's an option in the same way that snorting a line of coke and downing a bottle of Jack Daniel's is an option. You are going to have an *amazing* time! The problems arise the following morning when you roll off the bed, smash your naked body into the ground, and discover that Ms. "Angelique" has disappeared and so has your wallet.
 
 ## Take 4: The government should cap credit card interest rates. {#take-4}
 
