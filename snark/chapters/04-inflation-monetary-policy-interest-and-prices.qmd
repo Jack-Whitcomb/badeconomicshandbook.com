@@ -6,17 +6,21 @@ title: 'Chapter 4: Inflation, monetary policy, interest, and prices'
 
 [Rating: D-tier]{.rating .tier-d}
 
-This claim has been made by many people, but we will use as an example Senator Bernie Sanders, who argued this point in November of 2022. At that point, the price level had risen about 7% from November 2021,[^n131] a remarkably high rate of inflation.
+Smoking meth, joining the NFL, and reading tweets about economics by Bernie Sanders are all very effective ways to destroy your brain. I don't have Jesse Pinkman or John Madden here to write for me, so we're going to be focusing on the third option.
+
+Sanders argued this point about inflation in November of 2022 while writing in Fox News (of course).[^n158] At that point, the price level had risen about 7% from November 2021,[^n131] a remarkably high rate of inflation, so it's no surprise that people were looking for someone to point the finger at.
 
 The weaker version of this claim (that inflation in general is caused by corporate greed) makes little sense on short reflection. The rate of inflation varies greatly over time:
 
 ![](../images/ch04-01.png){width="91%"}
 
-We would not expect corporate greed to vary this much. Coincidentally, where inflation has been remarkably high, we can spot macroeconomic changes that explain the difference. In the 1970s, for example, the United States was hit by an energy crisis: OPEC, a cartel of petroleum-exporting countries, greatly increased oil prices by choking supply. Since oil is a particularly useful commodity with few substitutes, the effects of OPEC's embargo were quite strong. Similarly, but working in the opposite direction, the Great Recession briefly caused deflation in the United States, since it shocked aggregate demand---less money changing hands means slower, or even negative, price growth.
+Was the 1970s peak greed? Were corporations unusually generous during the financial crisis?
 
-But of course, "inflation is caused by corporate greed" is too easy to attack. The stronger claim, and one Sanders makes the case for, is that inflation is needlessly high when it occurs because of corporate greed. He cites a study finding that "nearly 54% of the rise in inflation is directly attributable to the astronomical increase in corporate profit margins."
+I do not think this theory has much to do with how inflation actually works. Corporations are *always* going to be trying to charge the highest prices they can; they don't wake up some days and decide they're going to be much greedier. Coincidentally, where inflation has been remarkably high, we can spot macroeconomic changes that explain the difference: in the 1970s, the United States was hit by an energy crisis. OPEC, a cartel of petroleum-exporting countries, greatly increased oil prices by choking supply. Since oil is a particularly useful commodity with few substitutes, the effects of OPEC's embargo were quite strong. Similarly, but working in the opposite direction, the Great Recession briefly caused deflation in the United States, since it shocked aggregate demand---less money changing hands means slower, or even negative, price growth.
 
-This study, as it turns out, comes from the Economic Policy Institute,[^n132] our devious villain from [Chapter 1, Take 4](01-living-standards.qmd#take-4). For most companies in the private sector, we have detailed data on their prices as well as what they are paying their employees, and what they're spending on capital (like replacing a grill at McDonald's). The author takes the observed change in prices, subtracts the changes in input costs, and uses that to identify that most of the increase in prices went into profits.
+But of course, "inflation is caused by corporate greed" is too easy to attack. The stronger claim, and one Sanders makes the case for, is that inflation is needlessly high when it occurs because of corporate greed. He cites a study finding that "nearly 54% of the rise in inflation is directly attributable to the astronomical increase in corporate profit margins." So maybe corporations do charge the highest prices they can at all times, but sometimes macroeconomic changes form a cover for them to hike prices even more.
+
+This study that Sanders cited, as it turns out, comes from the Economic Policy Institute,[^n132] our devious villain from [Chapter 1, Take 4](01-living-standards.qmd#take-4). For most companies in the private sector, we have detailed data on their prices as well as what they are paying their employees, and what they're spending on capital (like replacing a grill at McDonald's). The author takes the observed change in prices, subtracts the changes in input costs, and uses that to identify that most of the increase in prices went into profits.
 
 The problem is that the implicit claim being made here is a causal one: "If corporations did not have so much power and did not act with such greed, prices would not have risen as much." In other words, if we could live in a better world of greater competition (and perhaps greater generosity), inflation would not be so terrible.
 
@@ -35,15 +39,15 @@ One way we can check this claim is by looking at inflation in low and high conce
 
 ![](../images/ch04-03.png){width="95%"}
 
-This figure comes from the attached endnote.[^n134] As you can see, low concentration industries did not experience lower inflation than high concentration industries. While this analysis is not causal, it is suggestive that the supply shock story is correct, and should at least rule out overconfident, simplistic stories about greed driving inflation. We would like something like a natural experiment as a check, but those are rarely available to macroeconomists.
+This figure comes from the attached endnote.[^n134] As you can see, low concentration industries did not experience lower inflation than high concentration industries. While this analysis is not causal, it is suggestive that the supply shock story is correct, and should at least rule out overconfident, simplistic stories about greed driving inflation. We would like something like a natural experiment as a check, but those are rarely available to macroeconomists. (Sad! Won't somebody think of the papers that could be written? I say we start randomly deposing central bankers.)
 
-Many beliefs about the economy described in this book are like string theory in that they have some theoretical beauty to them but cannot be confirmed by evidence (at least for now). This is one such belief. I can't strictly call it false, but there's a much simpler explanation for how this works. The evidence doesn't allow us to rule out the standard picture.
+The evidence Sanders is citing is just as likely to be observed if greedflation isn't real as if it is, so it doesn't actually prove anything. Meanwhile, the companies we would expect to have taken advantage of the situation to raise prices more because they lack competition actually didn't raise prices all that much. Methinks the greedflation hypothesis is lacking.
 
 ## Take 2: Price gouging is real, and should be addressed with price controls. {#take-2}
 
 [Rating: D-tier]{.rating .tier-d}
 
-The weak version of this claim is easy to rebut. If you claim that a business raising prices when a crisis occurs is *necessarily* "price gouging" as some kind of distinct phenomenon from normal price hikes when a supply shock occurs, you are just criticizing businesses for not being generous with their money. Using price controls in this case would just make a bad situation worse by making it unprofitable to assist people who need help.
+The weak version of this claim is easy to rebut. If you claim that a business raising prices when a crisis occurs is *necessarily* "price gouging" as some kind of distinct phenomenon from normal price hikes when a supply shock occurs, you are just criticizing businesses for not being generous with their money. Using price controls in this case would just make a bad situation worse by making it unprofitable to assist people who need help. This is sad-but-true Econ 101 stuff.
 
 What happens when, in an emergency situation, price gouging laws are present? From NPR:[^n136]
 
@@ -51,7 +55,7 @@ What happens when, in an emergency situation, price gouging laws are present? Fr
 
 We don't have to limit our evidence to anecdotes. "Hurricanes and Gasoline Price Gouging"[^n137] provides some evidence by examining data on station-level retail gas prices combined with weather data. "We find no evidence for widespread price gouging. Instead, we document evidence consistent with shortages predicted by theory in the presence of restrictions on price movements." To be clear, the authors simply mean that they find no evidence of producers raising prices far above the increases in input costs. They do find that prices tend to rise when hurricanes strike.
 
-Despite the findings of the above paper, there are others that suggest current anti-price gouging laws are not actually enforced. That is the finding of Dinerstein et al. (2025).[^n138] Their findings are very interesting, and are summarized in a presentation available online, with the link in the endnotes.[^n139] They found that disasters cause large demand shocks, small average price increases, and shortages. A small subset of stores tend to engage in extreme price increases. Most interestingly, "Prices increases are, if anything, higher in states with anti-price gouging laws than states without." That is strongly suggestive of current laws being non-binding. They did find small effects on transportation costs, consistent with what NPR described.
+Despite the findings of the above paper, there are others that suggest current anti-price gouging laws are not actually enforced. That is the finding of Dinerstein et al. (2025).[^n138] Their findings are very interesting, and are summarized in a presentation available online, with the link in the endnotes.[^n139] They found that disasters cause large demand shocks, small average price increases, and shortages. A small subset of stores tend to engage in extreme price increases. Most interestingly, "\[Price\] increases are, if anything, higher in states with anti-price gouging laws than states without." That is strongly suggestive of current laws being non-binding. They did find small effects on transportation costs, consistent with what NPR described.
 
 The apparent disagreement on whether these laws are actually enforced is fairly easy to reconcile. The authors of "Hurricanes and Gasoline Price Gouging" do find evidence of shortages consistent with restrictions, but like Dinerstein et al., they find that while lots of complaints of unconscionable price increases are filed, only a small fraction of these complaints result in penalties. I am inclined to conclude that modern price gouging laws generally aren't enforced, and so they don't provide much evidence concerning the ability of price controls to generate shortages. The more useful result from "Hurricanes and Gasoline Price Gouging" is that price increases are consistent with input cost increases.
 
@@ -61,13 +65,13 @@ The quintessential historical example of price controls in action is the Nixon-e
 
 One might be interested in alleviating the distributional impact of a price hike, since it is especially difficult for the poor to cope with a higher price. In that case, it is simple enough to avoid the potential shortages triggered by price controls by introducing subsidies instead, both encouraging new supply and (if the subsidies are granted exclusively to the poor) alleviating the distributional concern.
 
-So that sufficient evidence is provided, you can find additional empirical evidence of the effects of price controls below:
+In case the point somehow isn't clear enough, here are a few other examples of what happens when you make it illegal to benefit from business activity and then ask people Oh Won't You Please Be Good and Do Business Activity Anyway?
 
 - Price controls enacted by the Venezuelan government triggered shortages.[^n142] At one point during the rule of Hugo Chavez, coffee sellers looking to avoid selling at a loss hoarded their supplies in hopes that the government would allow retail prices to rise.[^n143]
 - World War 2-era price controls in the United States made it difficult for meat producers to maintain profitability.[^n144] They degraded the quality of their own products to cut costs, and later cut production when the Truman administration refused to back down from controls. "By September of 1946, meat production had fallen drastically, plummeting over 80 percent from the previous year." Here is a paper[^n145] finding negative impacts on employment and output.
 - Similarly, the government of West Germany had imposed price controls for a brief period, carried on from the Nazi era. From Cato:[^n146] "In the following weeks Erhard removed most of the Bizone's remaining price controls, wage controls, allocation edicts and rationing directives. The effects of decontrol were dramatic. The shortages ended, black markets disappeared, and Germany's recovery began." (Troublingly, this is confounded somewhat by the coincidental introduction of Marshall Plan aid. You could easily tell a story about how it was aid that boosted Germany and not deregulation. It's an episode worth mentioning, nevertheless.)
 
-It is conceivable that more modest price controls won't cause shortages, but it is clear that businesses will not provision an adequate supply of goods if they are not rewarded for it.
+I am a big believer in the idea that if you are gonna leave people to choose whether or not to do something anyway, you should probably make sure they have some good reason to do it that doesn't involve giving away free shit for no reason. People generally aren't willing to do that.
 
 ## Take 3: The Federal Reserve should cut interest rates to make housing more affordable. {#take-3}
 
@@ -125,6 +129,7 @@ What is clear is that many skeptics of QE do not understand it and seem to be un
 
 The Fed is not legally allowed to pay for a policy like Medicare for All, and for good reason---creating that much money would pay for the program, sure, but it would do so by greatly increasing the rate of inflation. Very little free money is involved in QE, if any, since the program centers around the purchase of bonds. A bank must first purchase a bond before it can be sold to the Fed; they do not appear in the coffers of large financial firms out of thin air.
 
+[^n158]: [foxnews.com/opinion/our-economic-crisis-isnt-inflation-its-corporat...](https://www.foxnews.com/opinion/our-economic-crisis-isnt-inflation-its-corporate-greed-gop-will-only-make-that-worse)
 [^n131]: [fred.stlouisfed.org/series/CPIAUCSL#](https://fred.stlouisfed.org/series/CPIAUCSL#)
 [^n132]: [epi.org/blog/corporate-profits-have-contributed-disproportionately-...](https://www.epi.org/blog/corporate-profits-have-contributed-disproportionately-to-inflation-how-should-policymakers-respond/)
 [^n133]: The graph is a recreation of the one in here: [nber.org/system/files/working\_papers/w32859/w32859.pdf](https://www.nber.org/system/files/working_papers/w32859/w32859.pdf)
