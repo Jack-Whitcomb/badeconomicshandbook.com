@@ -24,7 +24,13 @@ So: I rate this take 100% factual. Spit your truth, my friend. After all, the ra
 
 {{< tweet https://x.com/BadEconTakes/status/1305184211767156737 >}}
 
-It is difficult to precisely identify the living standards of the distant past, but very easy to tell that they were much, much worse than current living standards. The exact date of the creation of money is very hard to pin down, but we can find evidence of coins going back to like 650 BC,[^n266] so we can pin the date down as being "at least 2,500 years ago."
+Money, money, money. Everywhere I go, I see money. It's oppressive. And... green. Green like spinach. Eugh. I so badly wished I could be happy and free from money, so I recently took all of my clothes off, walked out the door and ran to the nearest forest, where I could finally live a life of luxury and prosperity. Then I stepped on a tree branch and contracted tetanus.
+
+I started to doubt the plan. Have my efforts to escape the horrors of capitalism been in vain? Did they find me and plant this diseased branch in the State of Nature, all so I would remain dependent on them for medical care? No. It couldn't be. I... I don't want to go on Medicaid. So, in spite of the attempts of the capitalists to draw me back to money, I persevered and treated my tetanus by gathering English Plantain and applying it to the wound to draw out the tetanus. Not long after this I collapsed into convulsions and fell unconscious (clearly the treatment had begun to do its hard work) and woke up in the hospital. Sadly, a group of hikers had kidnapped me and brought me there to "save my life." I was horrified when I saw the bill, so I ran away before they could ID me. Now I sit here on my laptop writing this to confirm to you once and for all: you cannot escape The Money. The Money always finds you.
+
+Anyway.
+
+It's hard to say exactly what living standards were like in the distant past, but very easy to tell that they were much, much worse than current living standards. The exact date of the creation of money is difficult to pin down, but we can find evidence of coins going back to, like, 650 BC,[^n266] so we can pin the date down as being "at least 2,500 years ago."
 
 But really, it doesn't matter: "the average person in the world of 1800 was no better off than the average person of 100,000 BC." That is from Gregory Clark's *A Farewell to Alms.*[^n267] He continues:
 
@@ -32,7 +38,9 @@ But really, it doesn't matter: "the average person in the world of 1800 was no b
 
 There is some dispute over exactly how much living standards varied before 1800, but little disagreement over the fact that they varied little compared to the variation that occurred after 1800.
 
-It is easy to see how much worse the quality of life must have been based solely on the date of invention for a variety of vitally important aspects of modern life. Antibiotics did not arrive until the discovery of penicillin in the 1920s. Before modern medicine, up to at least the year 1800, almost every mother would have to see nearly half her children die before turning 5.[^n268] These improvements have occurred not only because of improvements in medical care, but improvements in nutrition and sanitation. Before 1847, even physicians didn't know to wash their hands---thanks to Ignaz Semmelweis, obstetricians began doing so as a general practice, and fewer women died from infections during childbirth.[^n269]
+It is easy to see how much worse the quality of life must have been based solely on the date of invention for a variety of vitally important aspects of modern life. Antibiotics did not arrive until the discovery of penicillin in the 1920s. Before modern medicine, up to at least the year 1800, almost every mother would have to see nearly half her children die before turning 5.[^n268] Most tetanus patients died before the first treatment arrived in the late 1800s.
+
+Overall improvements in survival and disease incidence have occurred not only because of improvements in medical care, but improvements in nutrition and sanitation. Before 1847, even physicians didn't know to wash their hands---thanks to Ignaz Semmelweis, obstetricians began doing so as a general practice, and fewer women died from infections during childbirth.[^n269]
 
 It *is* true that hunter gatherers probably had more free time than we do, requiring perhaps 20 hours of work per week to acquire food.[^n270] But generally speaking, a life that is nasty, brutish, and short, in the words of Thomas Hobbes, is considered a horribly impoverished one even with lots of leisure time.
 
