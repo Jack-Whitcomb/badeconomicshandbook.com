@@ -22,6 +22,8 @@ Of course, GDP does not consider the effects of economic growth on the environme
 
 The United States and Europe, which make up most of the population of the developed world, remain above-average in terms of carbon dioxide emissions per capita.[^n161] But it is clear that this does not need to remain true for them to remain rich.
 
+At this point I could talk about how GDP is calculated and why it's really not unexpected that higher GDP per capita is associated with higher self-reported happiness, but I want to move on to the next take first. Let's go kill two lemmings with one cliff.
+
 ## Take 2: It's impossible for GDP to grow forever. {#take-2}
 
 [Rating: D-tier]{.rating .tier-d}
