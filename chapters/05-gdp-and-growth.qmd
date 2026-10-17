@@ -24,7 +24,7 @@ The United States and Europe, which make up most of the population of the develo
 
 [Rating: D-tier]{.rating .tier-d}
 
-GDP is the market value of all final goods and services produced in a country in a given year. If a country makes 10 nails and 10 hammers, and nails cost \$1 while hammers cost \$10, GDP is 10\*1 + 10\*10 = \$110. Notice, now, that if a tinkerer realizes that half a nail is just as effective as one nail, they can double nail production without using any more resources by splitting nails in half. That grows GDP, which becomes 20\*1 + 10\*10 = \$120.
+This claim is made to look much more obvious than it really is. GDP, to be clear, is the market value of all final goods and services produced in a country in a given year. If a country makes 10 nails and 10 hammers, and nails cost \$1 while hammers cost \$10, GDP is 10\*1 + 10\*10 = \$110. Notice, now, that if a tinkerer realizes that half a nail is just as effective as one nail, they can double nail production without using any more resources by splitting nails in half. That grows GDP, which becomes 20\*1 + 10\*10 = \$120.
 
 This is how innovation often works in the real world: they grow the economy by allowing companies to economize on some input. Here is an excerpt from a 1994 Scientific American article[^n162] on the aluminum can:
 
@@ -32,13 +32,7 @@ This is how innovation often works in the real world: they grow the economy by a
 
 GDP does not just grow by using more resources. It also grows through new ideas. Better engineering of aluminum cans and other objects allows the country to do more with less. Often, the ability to do more with less is used to make more, growing the size of the economy and the level of GDP per capita. That means more goods for each individual. Indeed, while in 1975 a can of coke could be purchased for \~0.0026%[^n163] of the median income,[^n164] in 2024 the figure was \~0.00155%. That's economic growth in action.
 
-So when someone tweets something like this:
-
-{{< tweet https://x.com/borkedsys/status/1941096086829138251 >}}
-
-...their argument mostly just relies on the fact that the audience doesn't know how GDP is calculated or how it grows. It's not a "how many resources are you using?" measuring stick, though certainly that's a major contributor to GDP, and GDP growth in the modern era has next to nothing to do with how rapidly you're using up the planet's finite physical stuff.
-
-Is it conceivable that we will eventually run out of ideas that allow us to economize, and thus face the bottleneck of our planet's finite resources? Of course. But compare the statement "GDP can't grow forever on a planet with finite resources" to "GDP can't grow forever because we'll eventually run out of ideas." This is just a motte and bailey. If you plan to argue for this point and want to be honest about it, be transparent about how difficult it is to prove what you seek to prove. It's not obvious that growth can't last forever, because it's not obvious that we're gonna run out of ideas.
+Is it conceivable that we will eventually run out of ideas that allow us to economize, and thus face the bottleneck of our planet's finite resources? Of course. But compare the statement "GDP can't grow forever on a planet with finite resources" to "GDP can't grow forever because we'll eventually run out of ideas." A clear motte and bailey in action. If you plan to argue for this point, be transparent about how difficult it is to prove what you seek to prove. It's not obvious that growth can't last forever.
 
 ## Take 3: North Korea and Cuba are poor because of sanctions. {#take-3}
 
