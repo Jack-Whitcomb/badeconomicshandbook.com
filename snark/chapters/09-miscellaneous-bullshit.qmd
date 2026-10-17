@@ -22,7 +22,7 @@ So: I rate this take 100% factual. Spit your truth, my friend. After all, the ra
 
 [Rating: Super F]{.rating .tier-superf}
 
-This take comes from here.[^n265]
+{{< tweet https://x.com/BadEconTakes/status/1305184211767156737 >}}
 
 It is difficult to precisely identify the living standards of the distant past, but very easy to tell that they were much, much worse than current living standards. The exact date of the creation of money is very hard to pin down, but we can find evidence of coins going back to like 650 BC,[^n266] so we can pin the date down as being "at least 2,500 years ago."
 
@@ -218,7 +218,6 @@ I tip my hat to Felpix, who created the original of this chart,[^n295] and to Ry
 
 There's no sudden jump. It's a smooth increase from the lowest earnings to the highest. Please stop saying that the median is skewed.
 
-[^n265]: [x.com/BadEconTakes/status/1305184211767156737](https://x.com/BadEconTakes/status/1305184211767156737)
 [^n266]: [en.wikipedia.org/wiki/History\_of\_coins](https://en.wikipedia.org/wiki/History_of_coins)
 [^n267]: [faculty.econ.ucdavis.edu/faculty/gclark/Farewell to Alms/FTA-chapte...](https://faculty.econ.ucdavis.edu/faculty/gclark/Farewell%20to%20Alms/FTA-chapter1.pdf)
 [^n268]: [ourworldindata.org/child-mortality-global-overview](https://ourworldindata.org/child-mortality-global-overview)
