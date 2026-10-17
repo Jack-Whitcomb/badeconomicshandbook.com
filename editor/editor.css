@@ -75,7 +75,9 @@ a { color: var(--link); }
 .tb svg { width: 16px; height: 16px; }
 .tb.serif { font-family: var(--serif); font-size: 1rem; }
 .sep { width: 1px; height: 20px; background: var(--chrome-line); margin: 0 .35rem; }
-.status { margin-left: auto; color: var(--muted); font-size: .78rem; white-space: nowrap; display: flex; align-items: center; gap: .4rem; }
+.status { margin-left: auto; color: var(--muted); font-size: .78rem; white-space: nowrap; display: flex; align-items: center; justify-content: flex-end; gap: .4rem; flex: 1 1 0; min-width: 0; }
+.status .pip { flex: none; }
+.status .txt { overflow: hidden; text-overflow: ellipsis; }
 .status .pip { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
 .status.changed .pip { background: var(--warn); }
 .status.busy .pip { background: var(--accent); animation: pulse 1s infinite alternate; }
@@ -133,6 +135,21 @@ a { color: var(--link); }
 .add:hover { background: var(--faint); color: var(--accent); opacity: 1; }
 .blk.flash { animation: flash 1.2s ease-out; }
 @keyframes flash { from { background: var(--accent-soft); } to { background: transparent; } }
+
+/* Entangled blocks (kept the same in both versions): a mark in the right margin */
+:root { --ent: #00796b; }
+:root[data-theme="dark"] { --ent: #4db6ac; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ent: #4db6ac; } }
+.blk.ent::after { content: ""; position: absolute; right: -14px; top: .2rem; bottom: 1.1rem; width: 2px; border-radius: 1px; background: var(--ent); opacity: .55; }
+.blk.ent.k-image::after { top: 1.45rem; bottom: 1.45rem; }
+.ent-mark { position: absolute; right: -36px; top: .2rem; width: 16px; height: 16px; color: var(--ent); cursor: help; }
+.blk.ent.k-image > .ent-mark { top: 1.45rem; }
+.ent-mark svg { width: 16px; height: 16px; }
+.tb.off { opacity: .4; }
+.tb.off:hover { background: transparent; }
+.dlg-sub { font-family: var(--ui); font-size: .85rem; font-weight: 650; margin: 1.2rem 0 .2rem; }
+.dlg-sub:first-child { margin-top: .4rem; }
+.dlg-body .help { color: var(--muted); font-family: var(--ui); font-size: .78rem; margin: 0 0 .4rem; }
 
 /* Footnote markers */
 .fn { display: inline; padding: .05em .32em; margin: 0 .04em; border-radius: 4px; vertical-align: .55em;
@@ -253,6 +270,9 @@ dialog::backdrop { background: rgba(0,0,0,.35); }
 @media (max-width: 820px) {
   .gut { left: -30px; }
   .add { left: -28px; }
+  .ent-mark { right: -14px; width: 12px; height: 12px; }
+  .ent-mark svg { width: 12px; height: 12px; }
+  .blk.ent::after { right: -6px; }
   .page { padding-left: 34px; padding-right: 16px; }
   .status .txt { display: none; }
 }

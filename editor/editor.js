@@ -46,6 +46,8 @@ const ICON = {
   img: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="m2.5 11 3.5-3.5 3 3 2-2 2.5 2.5"/></svg>',
   star: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="m8 2 1.8 3.8 4.2.5-3.1 2.9.8 4.1L8 11.3l-3.7 2 .8-4.1L2 6.3l4.2-.5z"/></svg>',
   x: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg>',
+  ent: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.6 9.4a2.6 2.6 0 0 0 3.7 0l2.4-2.4a2.6 2.6 0 0 0-3.7-3.7l-.9.9"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l.9-.9"/></svg>',
+  unent: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m10.3 9.4 2.4-2.4a2.6 2.6 0 0 0-3.7-3.7l-.9.9M5.7 6.6 3.3 9a2.6 2.6 0 0 0 3.7 3.7l.9-.9M2.5 2.5l11 11"/></svg>',
   code: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5.5 4.5-3 3.5 3 3.5M10.5 4.5l3 3.5-3 3.5"/></svg>',
 };
 
@@ -82,6 +84,8 @@ async function getFile(path, ref) {
 
 let pages = [];              // [{path, title}]
 let cur = null;              // {path, title, baseSha, origText, doc}
+let twin = null;             // the same page in the other version, for entangled blocks: {path, baseSha, origText, doc, stale}
+let entPrev = new Map();     // entangled block id -> its Markdown at the last sync (see syncTwin)
 const units = new Map();     // unit id -> {u, b}
 const pendingImages = new Map();   // repo path -> {b64, url}
 const imageNames = new Map(); // book ("" or "snark/") -> names in its images/ folder on GitHub (loaded when needed)
@@ -198,10 +202,11 @@ async function openPage(path) {
   closePop();
   $("#doc").replaceChildren(h("div", { class: "loading" }, "Opening…"));
   $("#banner").hidden = true;
-  let f;
-  try { f = await getFile(path); }
+  let f, tw;
+  try { [f, tw] = await Promise.all([getFile(path), loadTwin(path)]); }
   catch (err) { $("#doc").replaceChildren(h("div", { class: "loading" }, err.status === 404 ? "That page doesn’t exist on GitHub." : "Couldn’t open the page: " + err.message)); return; }
   cur = { path, baseSha: f.sha, origText: f.text, doc: null };
+  twin = tw;
   undoStack = []; redoStack = [];
   let text = f.text;
   const draft = readDraft(path);
@@ -216,17 +221,21 @@ async function openPage(path) {
     }
   } else if (draft) store.del(DRAFT_KEY + path);
   loadText(text);
-  lastStable = serialize();
+  lastStable = state();
+  if ($("#banner").hidden) twinBanner();
   document.title = `${cur.title} · Editor`;
   $("#view-live").href = pageUrl(path);
   $("#gh-link").href = `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${path}`;
   renderPageList();
   updateStatus();
+  updateEntButton();
   window.scrollTo(0, 0);
 }
 
 function loadText(text) {
+  matchCache = null;
   cur.doc = MD.parseDoc(text);
+  entPrev = entMap(cur.doc);
   cur.title = (cur.path.endsWith("index.qmd") ? "Home" : (cur.doc.title ? cur.doc.title.text : cur.path)) + (bookOf(cur.path) ? " (Snark mode)" : "");
   renderDoc();
 }
@@ -276,6 +285,11 @@ function renderBlock(b) {
   el.dataset.bid = b.id;
   el.prepend(h("div", { class: "gut", contenteditable: "false" },
     h("button", { class: "handle", type: "button", title: "Move, change or delete", "aria-label": "Block options", html: ICON.grip, onclick: e => blockMenu(b, e.currentTarget) })));
+  if (MD.entOf(b)) {
+    el.classList.add("ent");
+    el.append(h("span", { class: "ent-mark", contenteditable: "false", html: ICON.ent,
+      title: twin ? `Entangled: changes here also change the ${twinName()}` : "Entangled (the other version of this page couldn’t be loaded)" }));
+  }
   el.append(addButton(b));
   b.el = el;
   return el;
@@ -301,7 +315,8 @@ function renderTextBlock(b) {
 }
 
 function renderUnit(u, b, tag, ph) {
-  const el = h(tag, { class: "u", contenteditable: "true", spellcheck: "true", "data-uid": u.id, "data-ph": ph || "" });
+  const locked = MD.entOf(b) && (!twin || twin.stale);
+  const el = h(tag, { class: "u", contenteditable: locked ? "false" : "true", spellcheck: "true", "data-uid": u.id, "data-ph": ph || "" });
   if (u.md0 === undefined) u.md0 = u.md;
   el.append(renderInline(MD.parseInline(u.md), { prev: null }));
   u.el = el;
@@ -412,40 +427,44 @@ function pickImage(cb) {
   inp.click();
 }
 
-async function stageImage(file) {
+// both: also upload it to the other version's images/ folder (for an entangled image), under the same name
+async function stageImage(file, both) {
   if (file.size > 8 * 1024 * 1024) { toast("That image is over 8 MB. Please shrink it first."); return null; }
   const book = bookOf(cur.path);
-  if (!imageNames.has(book)) {
+  const books = both && twin ? [book, bookOf(twin.path)] : [book];
+  for (const bk of books) {
+    if (imageNames.has(bk)) continue;
     // The new file's name must not match an existing image, so don't guess if the list can't be read
-    try { imageNames.set(book, (await gh(repo(`/contents/${book}images?ref=${BRANCH}`))).map(f => f.name)); }
+    try { imageNames.set(bk, (await gh(repo(`/contents/${bk}images?ref=${BRANCH}`))).map(f => f.name)); }
     catch (e) { toast("Couldn’t check the existing images on GitHub, so the image wasn’t added. Try again."); return null; }
   }
   const m = /chapters\/(\d+)-/.exec(cur.path);
   const prefix = m ? "ch" + m[1] : cur.path.replace(/^.*\//, "").replace(/\.qmd$/, "").replace(/^introduction$/, "intro");
-  const taken = imageNames.get(book).concat([...pendingImages.keys()].filter(p => bookOf(p) === book).map(p => p.split("/").pop()));
+  const taken = books.flatMap(bk => imageNames.get(bk).concat([...pendingImages.keys()].filter(p => bookOf(p) === bk).map(p => p.split("/").pop())));
   let n = 0;
   for (const name of taken) { const mm = new RegExp(`^${prefix}-(\\d+)\\.`).exec(name); if (mm) n = Math.max(n, +mm[1]); }
   const ext = ({ "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp", "image/svg+xml": "svg" })[file.type] || "png";
   const name = `${prefix}-${String(n + 1).padStart(2, "0")}.${ext}`;
   const buf = new Uint8Array(await file.arrayBuffer());
   let bin = ""; for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
-  pendingImages.set(book + "images/" + name, { b64: btoa(bin), url: URL.createObjectURL(file) });
+  const img = { b64: btoa(bin), url: URL.createObjectURL(file) };
+  for (const bk of books) pendingImages.set(bk + "images/" + name, img);
   return "../".repeat(cur.path.slice(book.length).split("/").length - 1) + "images/" + name;
 }
 
 async function replaceImage(b, file) {
-  const src = await stageImage(file);
+  const src = await stageImage(file, !!MD.entOf(b));
   if (!src) return;
   checkpoint();
   b.src = src; b.dirty = true;
   rerender(b); afterChange();
 }
 
-async function insertImageAfter(after, file) {
-  const src = await stageImage(file);
+async function insertImageAfter(after, file, entangled) {
+  const src = await stageImage(file, entangled);
   if (!src) return;
   checkpoint();
-  const nb = MD.makeBlock(`![](${src}){width="90%"}`, [""]);
+  const nb = MD.makeBlock(`![](${src}){width="90%"${entangled ? ` ent="${newEntId()}"` : ""}}`, [""]);
   nb.dirty = true;
   insertBlock(nb, after);
   afterChange();
@@ -651,7 +670,7 @@ function deleteBlock(b) {
   afterChange(); renumberNotes();
   const near = allUnits().find(x => idx(x.b) >= i) || allUnits().slice(-1)[0];
   if (near) setCaret(near.u.el, 0);
-  toast("Deleted.", ["Undo", undo]);
+  toast(MD.entOf(b) && twin ? `Deleted here and in the ${twinName()}.` : "Deleted.", ["Undo", undo]);
 }
 
 // New text blocks of a given kind holding these pieces of text (Markdown)
@@ -695,10 +714,11 @@ function setHeadingId(b) {
 
 function addNew(after, kind) {
   closePop();
-  if (kind === "image") { pickImage(f => insertImageAfter(after, f)); return; }
+  if (kind === "image" || kind === "entimage") { pickImage(f => insertImageAfter(after, f, kind === "entimage")); return; }
   checkpoint();
   let nb;
-  if (kind === "rating") { nb = MD.makeBlock("[Rating: D-tier]{.rating .tier-d}", [""]); nb.dirty = true; }
+  if (kind === "entpara") { nb = newTextBlock("para", [""])[0]; nb.ent = newEntId(); nb.raw = MD.blockMd(nb); }
+  else if (kind === "rating") { nb = MD.makeBlock("[Rating: D-tier]{.rating .tier-d}", [""]); nb.dirty = true; }
   else {
     nb = newTextBlock(kind, [kind === "heading" ? nextTakeTitle(after) : ""])[0];
   }
@@ -727,14 +747,19 @@ function blockMenu(b, anchor) {
     menuItem("up", "Move up", () => moveBlock(b, -1)),
     menuItem("down", "Move down", () => moveBlock(b, 1)),
   ];
-  if (isText(b) && !b.code) {
+  const ent = MD.entOf(b);
+  if (twin && !twin.stale && (b.kind === "para" || b.kind === "image")) {
+    if (ent) items.push(h("hr"), menuItem("unent", "Untangle", () => untangle(b)));
+    else if (twinMatches().has(b)) items.push(h("hr"), menuItem("ent", "Entangle", () => entangle(b)));
+  }
+  if (isText(b) && !b.code && !ent) {
     items.push(h("hr"), h("div", { class: "lbl" }, "Turn into"));
     const opts = [["para", "para", "Paragraph"], ["heading", "head", "Heading"], ["quote", "quote", "Quote"], ["ul", "ul", "Bulleted list"], ["ol", "ol", "Numbered list"]];
     const curKind = b.kind === "list" ? (/^\d/.test(b.items[0].marker) ? "ol" : "ul") : b.kind;
     for (const [k, ic, label] of opts) if (k !== curKind) items.push(menuItem(ic, label, () => convertBlock(b, k)));
   }
   if (b.kind !== "image" && b.kind !== "rating" && b.kind !== "tweet") items.push(h("hr"), menuItem("code", "Edit as Markdown", () => codeEdit(b)));
-  items.push(h("hr"), menuItem("trash", "Delete", () => deleteBlock(b), "danger"));
+  items.push(h("hr"), menuItem("trash", ent && twin ? "Delete from both versions" : "Delete", () => deleteBlock(b), "danger"));
   openPop(anchor, h("div", { class: "menu" }, items), { side: "right" });
   anchor.closest(".gut").classList.add("open");
 }
@@ -749,7 +774,10 @@ function addMenu(after, anchor) {
     menuItem("ul", "Bulleted list", () => addNew(after, "ul")),
     menuItem("ol", "Numbered list", () => addNew(after, "ol")),
     menuItem("img", "Image…", () => addNew(after, "image")),
-    menuItem("x", "Post from X…", () => tweetPop(anchor, "", url => insertTweetAfter(after, url)))), { side: "right" });
+    menuItem("x", "Post from X…", () => tweetPop(anchor, "", url => insertTweetAfter(after, url))),
+    canAddEntangled(after) ? [h("hr"), h("div", { class: "lbl" }, "Add to both versions"),
+      menuItem("ent", "Entangled paragraph", () => addNew(after, "entpara")),
+      menuItem("img", "Entangled image…", () => addNew(after, "entimage"))] : null), { side: "right" });
   anchor.classList.add("open");
 }
 
@@ -784,7 +812,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && pop) { clo
 let toastTimer;
 function toast(msg, action) {
   const t = $("#toast");
-  t.replaceChildren(h("span", {}, msg), action ? h("button", { type: "button", onclick: () => { t.classList.remove("show"); action[1](); } }, action[0]) : null);
+  t.replaceChildren(h("span", {}, msg), ...(action ? [h("button", { type: "button", onclick: () => { t.classList.remove("show"); action[1](); } }, action[0])] : []));
   t.classList.add("show");
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), action ? 6000 : 3500);
 }
@@ -973,9 +1001,10 @@ function bindEditing() {
   document.addEventListener("selectionchange", () => {
     const sel = getSelection();
     if (sel.rangeCount && unitOf(sel.anchorNode)) lastRange = { range: sel.getRangeAt(0).cloneRange(), el: unitOf(sel.anchorNode).el };
+    clearTimeout(entBtnTimer); entBtnTimer = setTimeout(updateEntButton, 120);
   });
 }
-let lastRange = null;
+let lastRange = null, entBtnTimer;
 
 // Pasted text keeps its footnotes, even when copied from another page
 function withNotes(c) {
@@ -1116,6 +1145,8 @@ function splitUnit(x) {
   if (b.kind === "para" || b.kind === "heading") {
     if (b.kind === "heading") setHeadingId(b);
     const nb = newTextBlock("para", [md2])[0];
+    // Splitting an entangled paragraph keeps both halves entangled, so the other version keeps all the text
+    if (b.ent && md2.trim()) { nb.ent = newEntId(); nb.raw = MD.blockMd(nb); }
     rerender(b); insertBlock(nb, b); target = nb.units[0];
   } else {
     const c = container(b, u), i = c.arr.indexOf(u);
@@ -1164,6 +1195,10 @@ function mergeBack(x) {
       return true;
     }
     return false;
+  }
+  if (prev.b !== x.b && MD.entOf(prev.b) !== MD.entOf(x.b) && x.u.md.trim()) {
+    toast(MD.entOf(x.b) ? "This paragraph is entangled and the one above isn’t, so they can’t be joined. Untangle it first." : "The paragraph above is entangled and this one isn’t, so they can’t be joined. Untangle it first.");
+    return true;
   }
   checkpoint();
   const off = textLength(prev.u.el);
@@ -1216,6 +1251,7 @@ function arrowNav(e, x) {
 function command(cmd) {
   if (cmd === "undo") return undo();
   if (cmd === "redo") return redo();
+  if (cmd === "entangle") return entangleCommand();
   const sel = getSelection();
   const x = sel.rangeCount ? unitOf(sel.anchorNode) : null;
   if (!x) { toast("Click into the text first."); return; }
@@ -1292,7 +1328,8 @@ function renumberNotes() {
 
 function nextLabel() {
   let n = 0;
-  for (const note of cur.doc.notes) { const m = /^n(\d+)$/.exec(note.label); if (m) n = Math.max(n, +m[1]); }
+  // Unused in the other version too, so a note in an entangled paragraph can be copied there as is
+  for (const note of cur.doc.notes.concat(twin ? twin.doc.notes : [])) { const m = /^n(\d+)$/.exec(note.label); if (m) n = Math.max(n, +m[1]); }
   return "n" + (n + 1);
 }
 
@@ -1370,6 +1407,7 @@ function newNotePop(x) {
     const label = lab.value.trim().replace(/[\s\]^]/g, "") || nextLabel();
     if (!text) { closePop(); return; }
     if (noteByLabel(label)) { toast(`There’s already a note called ${label} on this page.`); return; }
+    if (twin && twin.doc.notes.some(n => n.label === label) && MD.entOf(x.b)) { toast(`The ${twinName()} already has a note called ${label}. Pick another name.`); return; }
     closePop();
     checkpoint();
     cur.doc.notes.push({ label, md: MD.noteFromInput(text) });
@@ -1392,9 +1430,223 @@ function newNotePop(x) {
   input.focus();
 }
 
+/* =================================================================== entangled blocks
+
+   A paragraph or image that is identical in the normal and Snark mode versions of a page can be
+   entangled: md.js gives it a hidden id in both files, and edits to it here are copied into the
+   other version (`twin`, loaded with every page and saved as that page's draft). Publishing then
+   commits both files. Between two entangled blocks that are next to each other in both versions,
+   "+" can add an entangled paragraph or image, which goes into both. */
+
+function twinPathOf(path) { return bookOf(path) ? path.slice(bookOf(path).length) : "snark/" + path; }
+function twinName() { return twin && bookOf(twin.path) ? "Snark mode version" : "normal version"; }
+
+// The other version as it would be published: GitHub's copy, or its unpublished draft
+async function loadTwin(path) {
+  const tp = twinPathOf(path);
+  if (!pages.some(pg => pg.path === tp)) return null;
+  let f;
+  try { f = await getFile(tp); } catch (e) { return null; }
+  const t = { path: tp, baseSha: f.sha, origText: f.text, stale: false };
+  const d = readDraft(tp);
+  let text = f.text;
+  // A draft made before the page last changed on GitHub can't be built on without losing something
+  if (d && d.text !== f.text) { if (d.base === f.sha) text = d.text; else t.stale = true; }
+  t.doc = MD.parseDoc(text);
+  return t;
+}
+
+function serializeTwin() {
+  const d = twin.doc;
+  return MD.serializeDoc(Object.assign({}, d, { blocks: d.blocks.filter(b => !isEmptyText(b)) }), bmd);
+}
+
+const noteLabels = md => [...new Set([...md.matchAll(/\[\^([^\]\s]+)\](?!:)/g)].map(m => m[1]))];
+function notesKey(doc, md) { return noteLabels(md).map(l => { const n = doc.notes.find(x => x.label === l); return "\n" + l + ":" + (n ? n.md : ""); }).join(""); }
+
+// id -> Markdown (with its footnote texts) of each entangled block; empty paragraphs don't count yet
+function entMap(doc) {
+  const m = new Map();
+  for (const b of doc.blocks) {
+    const id = MD.entOf(b);
+    if (id && !isEmptyText(b)) { const md = MD.blockMd(b); m.set(id, md + notesKey(doc, md)); }
+  }
+  return m;
+}
+
+function newEntId() {
+  const used = new Set(cur.doc.blocks.concat(twin ? twin.doc.blocks : []).map(b => MD.entOf(b)).filter(Boolean));
+  let id;
+  do id = Math.random().toString(36).slice(2, 7); while (id.length < 5 || used.has(id));
+  return id;
+}
+
+// Copy entangled blocks that changed here since the last sync into the other version: new ones go
+// after the entangled block before them, deleted ones are deleted there too.
+function syncTwin() {
+  if (!twin || twin.stale || !cur || !cur.doc) return;
+  const now = entMap(cur.doc);
+  const order = cur.doc.blocks.filter(b => now.has(MD.entOf(b)));
+  const tb = twin.doc.blocks;
+  const find = id => tb.findIndex(x => MD.entOf(x) === id);
+  order.forEach((b, k) => {
+    const id = MD.entOf(b);
+    if (entPrev.get(id) === now.get(id)) return;
+    const j = find(id);
+    const md = MD.blockMd(b);
+    if (j >= 0) tb[j] = MD.makeBlock(md, tb[j].pre);
+    else {
+      let at = -1;
+      for (let q = k - 1; q >= 0 && at < 0; q--) { const p = find(MD.entOf(order[q])); if (p >= 0) at = p + 1; }
+      for (let q = k + 1; q < order.length && at < 0; q++) at = find(MD.entOf(order[q]));
+      if (at < 0) at = tb.length;
+      tb.splice(at, 0, MD.makeBlock(md, [""]));
+    }
+    for (const l of noteLabels(md)) {
+      const n = noteByLabel(l);
+      if (!n) continue;
+      const t = twin.doc.notes.find(x => x.label === l);
+      if (t) t.md = n.md; else twin.doc.notes.push({ label: l, md: n.md });
+    }
+  });
+  for (const id of entPrev.keys()) if (!now.has(id)) { const j = find(id); if (j >= 0) tb.splice(j, 1); }
+  entPrev = now;
+}
+
+// Blocks here that are identical to a block in the other version (and not entangled yet): this page's
+// block -> the other's. Lined up in order, so a paragraph that appears twice pairs with the right copy.
+let matchCache = null;
+function twinMatches() {
+  if (matchCache) return matchCache;
+  const key = (doc, b, i, side) => {
+    if (!MD.entOf(b)) {
+      if (b.kind === "para" && b.units[0].md.trim()) return "p" + b.units[0].md + notesKey(doc, b.units[0].md);
+      if (b.kind === "image") return "i" + MD.imageMd(b);
+    }
+    return "\u0001" + side + i;
+  };
+  const m = new Map();
+  if (!twin || twin.stale) return m;
+  const A = cur.doc.blocks, B = twin.doc.blocks;
+  const ops = lcs(A.map((b, i) => key(cur.doc, b, i, "a")), B.map((b, i) => key(twin.doc, b, i, "b"))) || [];
+  let i = 0, j = 0;
+  for (const [op] of ops) {
+    if (op === "=") { m.set(A[i], B[j]); i++; j++; } else if (op === "-") i++; else j++;
+  }
+  return matchCache = m;
+}
+
+function entangle(b) {
+  const tb = twinMatches().get(b);
+  if (!tb) return;
+  const u = b.kind === "para" ? b.units[0] : null, off = u && u.el ? caretOffset(u.el) : null;
+  checkpoint();
+  const id = newEntId();
+  MD.setEnt(b, id); b.dirty = true;
+  MD.setEnt(tb, id); tb.dirty = true;
+  rerender(b); afterChange();
+  if (off !== null && u.el) setCaret(u.el, off);
+  toast(`Entangled: changes here now also change the ${twinName()}.`, ["Undo", undo]);
+}
+
+function untangle(b) {
+  const id = MD.entOf(b);
+  const u = b.kind === "para" ? b.units[0] : null, off = u && u.el ? caretOffset(u.el) : null;
+  checkpoint();
+  MD.setEnt(b, null); b.dirty = true;
+  const tb = twin && twin.doc.blocks.find(x => MD.entOf(x) === id);
+  if (tb) { MD.setEnt(tb, null); tb.dirty = true; }
+  rerender(b); afterChange();
+  if (off !== null && u.el) setCaret(u.el, off);
+  toast(`Untangled: the two versions can now be edited separately.`, ["Undo", undo]);
+}
+
+function entangleCommand() {
+  const sel = getSelection();
+  const x = sel.rangeCount ? unitOf(sel.anchorNode) : null;
+  if (!twin) { toast("The other version of this page couldn’t be loaded, so nothing here can be entangled."); return; }
+  if (twin.stale) { toast(`The ${twinName()} has out-of-date unpublished changes. Open it and publish or discard them first.`); return; }
+  if (!x || x.note) { toast("Click into a paragraph first."); return; }
+  if (MD.entOf(x.b)) { untangle(x.b); return; }
+  if (x.b.kind !== "para") { toast("Only paragraphs and images (from their ⋮⋮ menu) can be entangled."); return; }
+  if (!twinMatches().has(x.b)) { toast(`This paragraph isn’t identical in the ${twinName()}, so it can’t be entangled.`); return; }
+  entangle(x.b);
+}
+
+// The toolbar button follows the paragraph the cursor is in
+function updateEntButton() {
+  const btn = $("#ent-btn");
+  if (!btn) return;
+  btn.hidden = !twin;
+  if (!twin || !cur) return;
+  const sel = getSelection();
+  const x = sel.rangeCount ? unitOf(sel.anchorNode) : null;
+  const b = x && !x.note ? x.b : null;
+  const on = !!(b && MD.entOf(b));
+  $(".lbl", btn).textContent = on ? "Untangle" : "Entangle";
+  btn.querySelector("svg").outerHTML = on ? ICON.unent : ICON.ent;
+  const ok = on || (b && b.kind === "para" && !twin.stale && twinMatches().has(b));
+  btn.classList.toggle("off", !ok);
+  btn.title = on ? `Stop copying edits of this paragraph to the ${twinName()}`
+    : ok ? `Entangle this paragraph with the same one in the ${twinName()}, so edits change both`
+    : `Entangle: only for a paragraph that is identical in the ${twinName()}`;
+}
+
+// "+" offers entangled blocks only between two entangled blocks that are next to each other in both versions
+function canAddEntangled(a) {
+  if (!a || !twin || twin.stale) return false;
+  syncTwin();
+  const nx = cur.doc.blocks[idx(a) + 1], ia = MD.entOf(a), inx = nx && MD.entOf(nx);
+  if (!ia || !inx || isEmptyText(a) || isEmptyText(nx)) return false;
+  const tb = twin.doc.blocks, j = tb.findIndex(x => MD.entOf(x) === ia);
+  return j >= 0 && !!tb[j + 1] && MD.entOf(tb[j + 1]) === inx;
+}
+
+// On opening a page: say if entangled blocks no longer match (edited on GitHub, or a draft was discarded)
+function twinBanner() {
+  if (!twin) return;
+  const here = entMap(cur.doc);
+  if (twin.stale) {
+    if (here.size) banner(`The ${twinName()} of this page has unpublished changes made before it last changed on GitHub. Until you publish or discard them there, entangled paragraphs here can’t be edited.`,
+      [["Open it", () => { location.hash = twin.path; }]]);
+    return;
+  }
+  const there = entMap(twin.doc);
+  const ids = new Set([...here.keys(), ...there.keys()].filter(id => here.get(id) !== there.get(id)));
+  if (!ids.size) return;
+  const n = ids.size;
+  const fix = fromHere => {
+    checkpoint();
+    for (const id of ids) {
+      const a = cur.doc.blocks.find(x => MD.entOf(x) === id), t = twin.doc.blocks.find(x => MD.entOf(x) === id);
+      if (a && t) {
+        if (fromHere) { entPrev.delete(id); continue; }
+        const md = MD.blockMd(t), nb = MD.makeBlock(md, a.pre);
+        for (const l of noteLabels(md)) {
+          const tn = twin.doc.notes.find(x => x.label === l);
+          if (!tn) continue;
+          const an = noteByLabel(l);
+          if (an) an.md = tn.md; else cur.doc.notes.push({ label: l, md: tn.md });
+        }
+        nb.dirty = true; replaceBlock(a, nb);
+      } else if (a) { if (fromHere) entPrev.delete(id); else { MD.setEnt(a, null); a.dirty = true; rerender(a); } }
+      else { MD.setEnt(t, null); t.dirty = true; }
+    }
+    entPrev = new Map([...entMap(cur.doc)].filter(([id]) => !(fromHere && ids.has(id))));
+    afterChange();
+    $("#banner").hidden = true;
+  };
+  banner(`${n} entangled ${n > 1 ? "paragraphs or images don’t" : "paragraph or image doesn’t"} match the ${twinName()} (edited outside this editor, or a draft was discarded).`,
+    [["Use this page’s text in both", () => fix(true)], [`Use the ${twinName()}’s text in both`, () => fix(false)]]);
+}
+
 /* =================================================================== undo, drafts, status */
 
-let typing = false, typingTimer = null, lastStable = "";
+let typing = false, typingTimer = null, lastStable = { text: "", twin: "" };
+
+// Both versions of the page as text: an undo step covers entangled changes to the other one too
+function state() { syncTwin(); return { text: serialize(), twin: twin ? serializeTwin() : "" }; }
+const sameState = (a, b) => a.text === b.text && a.twin === b.twin;
 
 function caretInfo() {
   const sel = getSelection();
@@ -1403,10 +1655,10 @@ function caretInfo() {
   return { i: allUnits().findIndex(y => y.u === x.u), off: caretOffset(x.el) };
 }
 
-function pushUndo(text, caret) {
+function pushUndo(st, caret) {
   const top = undoStack[undoStack.length - 1];
-  if (top && top.text === text) return;
-  undoStack.push({ text, caret });
+  if (top && sameState(top, st)) return;
+  undoStack.push({ text: st.text, twin: st.twin, caret });
   if (undoStack.length > 200) undoStack.shift();
   redoStack = [];
 }
@@ -1417,7 +1669,7 @@ function beginTyping() {
   clearTimeout(typingTimer);
   typingTimer = setTimeout(endTyping, 800);
 }
-function endTyping() { clearTimeout(typingTimer); typing = false; if (cur) lastStable = serialize(); }
+function endTyping() { clearTimeout(typingTimer); typing = false; if (cur) lastStable = state(); }
 
 // Before a structural change
 function checkpoint() { endTyping(); pushUndo(lastStable, caretInfo()); }
@@ -1425,8 +1677,9 @@ function checkpoint() { endTyping(); pushUndo(lastStable, caretInfo()); }
 function restore(state) {
   closePop();
   const y = window.scrollY;
+  if (twin && state.twin) twin.doc = MD.parseDoc(state.twin);
   loadText(state.text);
-  lastStable = state.text;
+  lastStable = { text: state.text, twin: state.twin };
   window.scrollTo(0, y);
   if (state.caret && state.caret.i >= 0) { const u = allUnits()[state.caret.i]; if (u) setCaret(u.u.el, state.caret.off); }
   afterChange();
@@ -1435,9 +1688,9 @@ function restore(state) {
 function undo() {
   if (!cur) return;
   endTyping();
-  const now = { text: serialize(), caret: caretInfo() };
+  const now = Object.assign(state(), { caret: caretInfo() });
   let s = undoStack.pop();
-  while (s && s.text === now.text) s = undoStack.pop();
+  while (s && sameState(s, now)) s = undoStack.pop();
   if (!s) { toast("Nothing to undo."); return; }
   redoStack.push(now);
   restore(s);
@@ -1447,12 +1700,13 @@ function redo() {
   endTyping();
   const s = redoStack.pop();
   if (!s) return;
-  undoStack.push({ text: serialize(), caret: caretInfo() });
+  undoStack.push(Object.assign(state(), { caret: caretInfo() }));
   restore(s);
 }
 
 let saveTimer;
 function afterChange() {
+  matchCache = null;
   clearTimeout(saveTimer);
   saveTimer = setTimeout(saveDraft, 400);
   renumberNotes();
@@ -1462,19 +1716,26 @@ function readDraft(path) { try { return JSON.parse(store.get(DRAFT_KEY + path));
 
 function saveDraft() {
   if (!cur) return;
-  const text = serialize();
-  const had = !!store.get(DRAFT_KEY + cur.path);
-  if (text === cur.origText) store.del(DRAFT_KEY + cur.path);
-  else if (!store.set(DRAFT_KEY + cur.path, JSON.stringify({ text, base: cur.baseSha, at: Date.now() }))) toast("Couldn’t save a draft in this browser. Publish soon so you don’t lose edits.");
-  if (had !== (text !== cur.origText)) renderPageList();
-  updateStatus(text);
+  const st = state();
+  let listChanged = false;
+  // Entangled changes to the other version are saved as its draft, so they show there too
+  for (const [pg, text] of [[cur, st.text], [twin && !twin.stale ? twin : null, st.twin]]) {
+    if (!pg) continue;
+    const had = !!store.get(DRAFT_KEY + pg.path);
+    if (text === pg.origText) store.del(DRAFT_KEY + pg.path);
+    else if (!store.set(DRAFT_KEY + pg.path, JSON.stringify({ text, base: pg.baseSha, at: Date.now() }))) toast("Couldn’t save a draft in this browser. Publish soon so you don’t lose edits.");
+    if (had !== (text !== pg.origText)) listChanged = true;
+  }
+  if (listChanged) renderPageList();
+  updateStatus(st);
+  updateEntButton();
 }
 
-function updateStatus(text) {
+function updateStatus(now) {
   const st = $("#status"), txt = $(".txt", st);
   if (!cur) return;
-  text = text === undefined ? serialize() : text;
-  const changed = text !== cur.origText;
+  now = now || state();
+  const changed = now.text !== cur.origText || twinChanged(now);
   $("#publish").disabled = !changed;
   st.className = "status";
   if (build && build.state !== "done") {
@@ -1486,6 +1747,8 @@ function updateStatus(text) {
 }
 
 window.addEventListener("beforeunload", () => { if (cur) { clearTimeout(saveTimer); saveDraft(); } });
+
+const twinChanged = st => !!twin && !twin.stale && st.twin !== twin.origText;
 
 /* =================================================================== review & publish */
 
@@ -1552,11 +1815,43 @@ function changeList(oldText, newText) {
 function openReview() {
   if (!cur) return;
   endTyping();
-  const text = serialize();
-  if (text === cur.origText) return;
-  const hunks = changeList(cur.origText, text);
+  const st = state(), text = st.text, both = twinChanged(st);
+  if (text === cur.origText && !both) return;
   const body = h("div", { class: "dlg-body" });
-  for (const g of hunks) {
+  if (both) body.append(h("h3", { class: "dlg-sub" }, cur.title.replace(/ \(Snark mode\)$/, "") + (bookOf(cur.path) ? " (Snark mode)" : " (normal)")));
+  body.append(...hunkEls(cur.origText, text));
+  if (both) {
+    body.append(h("h3", { class: "dlg-sub" }, `The ${twinName()}`),
+      h("p", { class: "help" }, "Entangled paragraphs and images are changed there too. Any other unpublished edits you made on that page are included."),
+      ...hunkEls(twin.origText, st.twin));
+  }
+  const images = usedImages(text, cur.path).concat(both ? usedImages(st.twin, twin.path) : []);
+  if (images.length) body.append(h("p", { class: "warnbox" }, `New image${images.length > 1 ? "s" : ""} to upload: ${images.join(", ")}`));
+  const missing = $$("#doc .fn.missing").map(c => c.dataset.label);
+  if (missing.length) body.append(h("p", { class: "warnbox" }, `Footnote marker${missing.length > 1 ? "s" : ""} without note text: ${missing.join(", ")}. ${missing.length > 1 ? "They" : "It"} will show as a broken number on the site.`));
+  const msg = h("input", { type: "text", value: `Edit ${shortTitle()}${both ? " and its " + twinName() : ""} (web editor)`, "aria-label": "Description of the change" });
+  const pub = h("button", { class: "btn primary", type: "button" }, "Publish");
+  const foot = h("div", { class: "dlg-foot" }, msg, h("button", { class: "btn", type: "button", onclick: () => $("#review").close() }, "Cancel"), pub);
+  pub.addEventListener("click", () => doPublish({ text, twin: both ? st.twin : null }, msg.value.trim() || `Edit ${shortTitle()}`, body, foot));
+  $("#review-inner").replaceChildren(
+    h("div", { class: "dlg-head" }, h("h2", {}, "Review changes"), h("p", {}, `${cur.title}. Removed text is red, added text is green. Footnote markers look like [^n12] here.`)),
+    body, foot);
+  $("#review").showModal();
+  pub.focus();
+}
+
+// Entanglement markers are left out of the word-by-word changes and summed up in one line instead
+const ENT_MARK = / <!--ent:[a-z0-9]+-->(?=\r?$)|\{ent="[a-z0-9]+"\}| ent="[a-z0-9]+"/gm;
+function entIds(text) { return new Set([...text.matchAll(/<!--ent:([a-z0-9]+)-->|\bent="([a-z0-9]+)"/g)].map(m => m[1] || m[2])); }
+
+function hunkEls(oldText, text) {
+  const out = [];
+  const was = entIds(oldText), now = entIds(text);
+  const added = [...now].filter(id => !was.has(id)).length, removed = [...was].filter(id => !now.has(id)).length;
+  const n = k => `${k} paragraph${k > 1 ? "s or images" : " or image"}`;
+  if (added || removed) out.push(h("p", { class: "help" }, [added ? `${n(added)} newly entangled` : "", removed ? `${n(removed)} untangled or deleted` : ""].filter(Boolean).join("; ") + "."));
+  oldText = oldText.replace(ENT_MARK, ""); text = text.replace(ENT_MARK, "");
+  for (const g of changeList(oldText, text)) {
     const hk = h("div", { class: "hunk" }, h("div", { class: "where" }, MD.smart(g.where)));
     // Show an edited paragraph as one word-by-word change; pair removed and added lines that share most words
     const words = l => new Set(l.toLowerCase().split(/\W+/).filter(Boolean));
@@ -1570,21 +1865,9 @@ function openReview() {
       hk.append(...wordDiff(d, g.add[k])); j = k + 1;
     }
     while (j < g.add.length) hk.append(plus(g.add[j++]));
-    body.append(hk);
+    out.push(hk);
   }
-  const images = usedImages(text, cur.path);
-  if (images.length) body.append(h("p", { class: "warnbox" }, `New image${images.length > 1 ? "s" : ""} to upload: ${images.join(", ")}`));
-  const missing = $$("#doc .fn.missing").map(c => c.dataset.label);
-  if (missing.length) body.append(h("p", { class: "warnbox" }, `Footnote marker${missing.length > 1 ? "s" : ""} without note text: ${missing.join(", ")}. ${missing.length > 1 ? "They" : "It"} will show as a broken number on the site.`));
-  const msg = h("input", { type: "text", value: `Edit ${shortTitle()} (web editor)`, "aria-label": "Description of the change" });
-  const pub = h("button", { class: "btn primary", type: "button" }, "Publish");
-  const foot = h("div", { class: "dlg-foot" }, msg, h("button", { class: "btn", type: "button", onclick: () => $("#review").close() }, "Cancel"), pub);
-  pub.addEventListener("click", () => doPublish(text, msg.value.trim() || `Edit ${shortTitle()}`, body, foot));
-  $("#review-inner").replaceChildren(
-    h("div", { class: "dlg-head" }, h("h2", {}, "Review changes"), h("p", {}, `${cur.title}. Removed text is red, added text is green. Footnote markers look like [^n12] here.`)),
-    body, foot);
-  $("#review").showModal();
-  pub.focus();
+  return out;
 }
 
 // New images waiting to be uploaded that this page's text uses
@@ -1594,8 +1877,11 @@ function usedImages(text, path) {
 
 function shortTitle() { return (cur.title || cur.path).replace(/^(Chapter \d+):.*?( \(Snark mode\))?$/, "$1$2"); }
 
-async function doPublish(text, message, body, foot, force) {
-  const page = cur;
+// st: {text, twin}; twin is the other version's text when entangled changes go there too, else null
+async function doPublish(st, message, body, foot, force) {
+  const page = cur, text = st.text;
+  const other = st.twin !== null ? twin : null;
+  const files = [[page, text]].concat(other ? [[other, st.twin]] : []);
   const steps = h("ul", { class: "steps" });
   const step = (label) => { const li = h("li", {}, h("span", { class: "ic" }, "…"), h("span", {}, label)); steps.append(li); return { ok: () => { li.firstChild.textContent = "✓"; }, fail: () => { li.firstChild.textContent = "✕"; } }; };
   body.replaceChildren(h("p", {}, "Publishing…"), steps);
@@ -1605,11 +1891,14 @@ async function doPublish(text, message, body, foot, force) {
     let commitSha = null;
     for (let attempt = 0; attempt < 2 && !commitSha; attempt++) {
       const head = (await gh(repo(`/git/ref/heads/${BRANCH}`))).object.sha;
-      let remoteSha = null;
-      try { remoteSha = (await gh(repo(`/contents/${encPath(page.path)}?ref=${head}`))).sha; } catch (e) { if (e.status !== 404) throw e; }
-      if (remoteSha !== page.baseSha && !force) { s1.fail(); conflict(page, text, message, body, foot); return; }
-      const entries = [{ path: page.path, mode: "100644", type: "blob", content: text }];
-      for (const p of usedImages(text, page.path)) {
+      for (const [pg] of files) {
+        let remoteSha = null;
+        try { remoteSha = (await gh(repo(`/contents/${encPath(pg.path)}?ref=${head}`))).sha; } catch (e) { if (e.status !== 404) throw e; }
+        if (remoteSha !== pg.baseSha && !force) { s1.fail(); conflict(pg, st, message, body, foot); return; }
+      }
+      const entries = files.map(([pg, t]) => ({ path: pg.path, mode: "100644", type: "blob", content: t }));
+      const imgs = [...new Set(files.flatMap(([pg, t]) => usedImages(t, pg.path)))];
+      for (const p of imgs) {
         const img = pendingImages.get(p);
         const blob = await gh(repo("/git/blobs"), { method: "POST", body: { content: img.b64, encoding: "base64" } });
         entries.push({ path: p, mode: "100644", type: "blob", sha: blob.sha });
@@ -1621,11 +1910,13 @@ async function doPublish(text, message, body, foot, force) {
       catch (e) { if (e.status !== 422 || attempt) throw e; /* someone else pushed just now: try again on top */ }
     }
     s1.ok();
-    // The page as GitHub now has it is our new starting point
-    const f = await getFile(page.path, commitSha);
-    for (const p of usedImages(text, page.path)) { if (imageNames.has(bookOf(p))) imageNames.get(bookOf(p)).push(p.split("/").pop()); pendingImages.delete(p); }
-    page.origText = f.text; page.baseSha = f.sha;
-    store.del(DRAFT_KEY + page.path);
+    // The pages as GitHub now has them are our new starting point
+    for (const [pg, t] of files) {
+      const f = await getFile(pg.path, commitSha);
+      for (const p of usedImages(t, pg.path)) { if (imageNames.has(bookOf(p))) imageNames.get(bookOf(p)).push(p.split("/").pop()); pendingImages.delete(p); }
+      pg.origText = f.text; pg.baseSha = f.sha;
+      store.del(DRAFT_KEY + pg.path);
+    }
     renderPageList();
     if (cur === page) { saveDraft(); }
     const s2 = step("Rebuilding the site (usually 1–2 minutes)");
@@ -1640,13 +1931,13 @@ async function doPublish(text, message, body, foot, force) {
   }
 }
 
-function conflict(page, text, message, body, foot) {
-  body.append(h("div", { class: "warnbox" }, "This page was changed on GitHub after you opened it (perhaps in GitHub’s own editor). Publishing now would replace those changes with your version."));
+function conflict(page, st, message, body, foot) {
+  body.append(h("div", { class: "warnbox" }, (page === cur ? "This page" : `The ${twinName()}`) + " was changed on GitHub after you opened this page (perhaps in GitHub’s own editor). Publishing now would replace those changes with your version."));
   foot.replaceChildren(
     h("a", { class: "btn", href: `https://github.com/${OWNER}/${REPO}/commits/${BRANCH}/${page.path}`, target: "_blank", rel: "noopener" }, "See the GitHub changes ↗"),
     h("span", { class: "grow" }),
     h("button", { class: "btn", type: "button", onclick: () => $("#review").close() }, "Cancel"),
-    h("button", { class: "btn primary", type: "button", onclick: () => doPublish(text, message, body, foot, true) }, "Replace them with mine"));
+    h("button", { class: "btn primary", type: "button", onclick: () => doPublish(st, message, body, foot, true) }, "Replace them with mine"));
 }
 
 async function trackBuild(sha, stepUi, body, path) {
@@ -1692,7 +1983,9 @@ async function trackBuild(sha, stepUi, body, path) {
 function showHelp() {
   const rows = [["Enter", "New paragraph"], ["Shift+Enter", "Line break inside a paragraph"], ["Backspace at the start", "Join with the paragraph above"],
     ["Ctrl+B / Ctrl+I", "Bold / italic"], ["Ctrl+K", "Link"], ["Ctrl+Shift+F", "Footnote at the cursor"], ["Ctrl+Z / Ctrl+Shift+Z", "Undo / redo"],
-    ["Click a footnote number", "See, edit or remove the note"], ["Ctrl-click a link", "Open it"], ["⋮⋮ left of a paragraph", "Move, change or delete it"], ["+ below a paragraph", "Add a paragraph, Take heading, rating, quote, list or image"]];
+    ["Click a footnote number", "See, edit or remove the note"], ["Ctrl-click a link", "Open it"], ["⋮⋮ left of a paragraph", "Move, change or delete it"], ["+ below a paragraph", "Add a paragraph, Take heading, rating, quote, list or image"],
+    ["Entangle (toolbar)", "Link the paragraph to the same paragraph in the other version, so edits change both. Only for paragraphs that are identical in both"],
+    ["+ between two entangled paragraphs", "Add an entangled paragraph or image to both versions"]];
   $("#review-inner").replaceChildren(
     h("div", { class: "dlg-head" }, h("h2", {}, "Keyboard shortcuts")),
     h("div", { class: "dlg-body" }, h("table", { class: "help-table", style: "width:100%;border-collapse:collapse;font-family:var(--ui);font-size:.85rem" },
@@ -1702,5 +1995,5 @@ function showHelp() {
 }
 
 // For tests
-window.__editor = { serialize: () => serialize(), get cur() { return cur; }, MD };
+window.__editor = { serialize: () => serialize(), get cur() { return cur; }, get twin() { return twin; }, MD };
 })();

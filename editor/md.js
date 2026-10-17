@@ -347,14 +347,33 @@ function classify(raw) {
     if (blank) return { kind: "raw", sub: "code" };
     return { kind: "list", items };
   }
+  if ((m = ENT_PARA.exec(raw)) && m[1].trim()) return { kind: "para", units: [unit(m[1])], ent: m[2] };
   return { kind: "para", units: [unit(raw)] };
+}
+
+/* Entangled blocks: a paragraph or image that is kept the same in the normal and Snark mode versions.
+   A paragraph carries a hidden marker at its end, "... text. <!--ent:k3x9q-->"; an image carries an
+   attribute, ![](../images/ch03-04.png){width="90%" ent="k3x9q"}. Neither shows on the site. */
+const ENT_PARA = /^([\s\S]*?) <!--ent:([a-z0-9]+)-->$/;
+
+// (A paragraph that is edited as Markdown source keeps its marker in its source.)
+function entOf(b) {
+  if (b.kind === "para") return b.ent || null;
+  if (b.kind === "image") return getAttr(b, "ent") || null;
+  const m = b.kind === "raw" && ENT_PARA.exec(b.raw);
+  return m ? m[2] : null;
+}
+function setEnt(b, id) {
+  if (b.kind === "para") { if (id) b.ent = id; else delete b.ent; }
+  else if (b.kind === "image") setAttr(b, "ent", id || "");
+  else if (b.kind === "raw" && ENT_PARA.test(b.raw)) b.raw = b.raw.replace(ENT_PARA, id ? `$1 <!--ent:${id}-->` : "$1");
 }
 
 // Markdown for a block from its parts. unitMd(u) gives a text unit's current Markdown.
 function blockMd(b, unitMd) {
   unitMd = unitMd || (u => u.md);
   switch (b.kind) {
-    case "para": return unitMd(b.units[0]);
+    case "para": return unitMd(b.units[0]) + (b.ent ? ` <!--ent:${b.ent}-->` : "");
     case "heading": return "#".repeat(b.level) + " " + unitMd(b.units[0]) + b.attrs;
     case "rating": return `[Rating: ${b.label}]{.rating .tier-${b.tier}}`;
     case "image": return imageMd(b);
@@ -509,6 +528,6 @@ function noteFromInput(text) {
 }
 
 const API = { parseInline, toMd, normalize, plainText, smart, parseDoc, serializeDoc, blockMd, classify, makeBlock,
-  parseBlocks, docBodyMd, imageMd, getAttr, setAttr, shortLink, noteFromInput, unit, RATING, titleLine };
+  parseBlocks, docBodyMd, imageMd, getAttr, setAttr, shortLink, noteFromInput, unit, RATING, titleLine, entOf, setEnt };
 if (typeof module !== "undefined" && module.exports) module.exports = API; else root.MD = API;
 })(this);

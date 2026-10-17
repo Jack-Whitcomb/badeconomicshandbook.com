@@ -34,8 +34,22 @@ repository through the GitHub API, one commit per **Publish**, which then rebuil
 
 `snark/` is a second, separate copy of the book (pages, images and its own `_quarto.yml`), published at
 `/snark/`. The "Snark mode" switch on each homepage links between the two. The copy shares the theme and
-scripts in the main folder but nothing else: editing a page in one version doesn't change the other. The
-web editor lists both versions. Build it locally with `quarto render snark` after `quarto render`.
+scripts in the main folder but nothing else: editing a page in one version doesn't change the other, except
+for entangled paragraphs (below). The web editor lists both versions. Build it locally with `quarto render snark`
+after `quarto render`.
+
+### Entangled paragraphs
+
+In the web editor, a paragraph (or image) that is identical in both versions can be **entangled** (toolbar
+button, or the ⋮⋮ menu for an image). After that, editing, splitting or deleting it in either version changes
+both, and publishing commits both files together. Between two entangled paragraphs that sit next to each other
+in both versions, **+** offers "Entangled paragraph" and "Entangled image…", which add to both versions (a new
+image is uploaded to both `images/` folders). Entangled blocks have a teal mark in the right margin.
+
+The link is stored in the `.qmd` files themselves and doesn't show on the site: a paragraph ends with a hidden
+marker like ` <!--ent:k3x9q-->`, and an image gets `ent="k3x9q"` among its `{...}` attributes. Deleting the
+marker on GitHub untangles that paragraph. If an entangled paragraph is edited outside the editor, the editor
+notices the next time either version is opened and offers to copy one version's text to the other.
 
 ## Footnotes (endnotes)
 
