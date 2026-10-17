@@ -6,8 +6,6 @@ title: 'Chapter 5: GDP and growth'
 
 [Rating: F-tier]{.rating .tier-f}
 
-If you ever hear someone express this opinion, do *not* ask them to explain how GDP is calculated. They will not know, and it's inappropriate to pull someone's pants down in a public space.
-
 Below, you can observe the correlation between self-reported life satisfaction and GDP per capita.[^n158]
 
 ![](../images/ch05-01.png){width="87%"}
