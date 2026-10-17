@@ -6,7 +6,7 @@ title: 'Chapter 3: Labor economics'
 
 [Rating: B-tier]{.rating .tier-b}
 
-There are plenty of reasonable minimum wage advocates out there, but I think this image is a pretty good encapsulation of how the typical person seems to think about how labor markets work:
+There are plenty of reasonable minimum wage advocates out there, but I think this image is a pretty good encapsulation of how the typical person seems to think labor markets work:
 
 ![](../images/ch03-01.png){width="54%"}
 
