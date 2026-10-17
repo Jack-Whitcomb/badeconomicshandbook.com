@@ -66,7 +66,7 @@ So in the future, if you ever see anyone forecasting hyperinflation in the US, y
 
 [Rating: Super F]{.rating .tier-superf}
 
-This take comes from here.[^n276]
+{{< tweet https://x.com/BadEconTakes/status/1249433462710218753 >}}
 
 Nobody likes being in debt, so it's natural to conclude that we'd all be better off as a "wealth economy" where the government never runs a deficit and nobody is allowed to lend. Yay! No more debt!
 
@@ -240,7 +240,6 @@ There's no sudden jump. It's a smooth increase from the lowest earnings to the h
 [^n273]: Image: Wikimedia Commons (public domain, Banco Central de Venezuela). [commons.wikimedia.org/wiki/File:Ven500000Av2018.jpg](https://commons.wikimedia.org/wiki/File:Ven500000Av2018.jpg)
 [^n274]: [en.wikipedia.org/wiki/Hyperinflation\_in\_the\_Weimar\_Republic#Causes](https://en.wikipedia.org/wiki/Hyperinflation_in_the_Weimar_Republic#Causes)
 [^n275]: [theholocaustexplained.org/the-nazi-rise-to-power/the-weimar-republi...](https://www.theholocaustexplained.org/the-nazi-rise-to-power/the-weimar-republic/invasion-of-the-ruhr/)
-[^n276]: [x.com/BadEconTakes/status/1249433462710218753](https://x.com/BadEconTakes/status/1249433462710218753)
 [^n277]: [x.com/mcsquared34/status/1803779627132850350](https://x.com/mcsquared34/status/1803779627132850350)
 [^n278]: [youtube.com/watch?v=hSp8IyaKCs0](https://www.youtube.com/watch?v=hSp8IyaKCs0)
 [^n279]: [economistwritingeveryday.com/2025/10/29/bad-claims-about-food-stamp...](https://economistwritingeveryday.com/2025/10/29/bad-claims-about-food-stamps-snap/)
