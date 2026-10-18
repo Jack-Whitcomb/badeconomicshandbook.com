@@ -50,7 +50,7 @@ Is it conceivable that we will eventually run out of ideas that allow us to econ
 
 One of the greatest puzzles of economics is why some countries are rich and others poor. The most popular explanation is probably institutions: essentially, the laws that govern a country dictate its incentives, and hence its economic future (though the concept of "institutions" is more expansive than what the laws are).
 
-I mentioned earlier in the book that it would be cool if macroeconomists had more natural experiments. This is *the* natural experiment in macroeconomics: split a country in half, turn one into an evil communist nightmare dystopia, and turn the other one into an evil capitalist nightmare dystopia (but make it business-friendly and give it democracy some time later). Decades later, you have a miserably poor half and a half that's really rich but can't stop making weird dramas about how terrible their bankruptcy system is.
+I mentioned earlier in the book that it would be cool if macroeconomists had more natural experiments. This is *the* natural experiment in macroeconomics: split a country in half, turn one into an evil communist autocracy, and turn the other one into an evil capitalist autocracy (but make it business-friendly and give it democracy some time later). Decades later, you have a miserably poor half and a half that's really rich but can't stop making weird dramas about how terrible their bankruptcy system is.
 
 The important point is that the two Koreas have a common genetic and cultural history, but their institutions diverged after 1945, and (coincidentally) their economic fortunes also diverged:[^n165]
 
