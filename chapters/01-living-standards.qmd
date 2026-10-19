@@ -130,6 +130,8 @@ To provide an analogy, if your own survey of Americans tells you that 80% of the
 
 This is one of the richest countries in the world.[^n40] Adjusted for purchasing power, the median American consumes more than seven times as much in goods and services compared to the median person in the world. It does not make sense to believe that most Americans are struggling.
 
+![](../images/ch01-10.png){width="90%"}
+
 We could, of course, focus on real issues in America, like the affordability of housing. That is where we turn next.
 
 [^n7]: [youtube.com/watch?v=lolm1jiIomo](https://www.youtube.com/watch?v=lolm1jiIomo)
