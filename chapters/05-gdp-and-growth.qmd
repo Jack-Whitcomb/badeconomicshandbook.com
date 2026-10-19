@@ -175,9 +175,11 @@ The same problem applies to a more limited degree whenever the government divert
 
 In practice, counting government spending as part of GDP doesn't make much of a difference anyway. Here's real GDP growth each year, in percentage points:
 
+<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKFP&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+
 And here's the same series, minus FRED's series for government spending's contribution to growth:
 
-![](../images/ch05-05.png){width="100%"}
+<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKG7&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
 
 [^n158]: [ourworldindata.org/grapher/gdp-vs-happiness](https://ourworldindata.org/grapher/gdp-vs-happiness)
 [^n159]: [ourworldindata.org/happiness-and-life-satisfaction](https://ourworldindata.org/happiness-and-life-satisfaction)
