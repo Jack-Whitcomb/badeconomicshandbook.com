@@ -153,7 +153,7 @@ A couple examples of this:
 
 This take is new to the online version! There's a similar idea already covered in Chapter 0, that economists think we should pay people to dig holes, but this is a good teaching moment about how GDP actually works.
 
-Is Mélenchon right that if you drive your car into a wall, GDP goes up because we need to repair the wall and the car? No. This mistake is so ancient that it predates the concept of GDP, with the economist Frédéric Bastiat---a Frenchman himself!---being one of the earliest to comment on it, and easily the most famous (at least among academic economists).
+Is Mélenchon right that if you drive your car into a wall, GDP goes up because we need to repair the wall and the car? Not really, with rare exceptions. This mistake is so ancient that it predates the concept of GDP, with the economist Frédéric Bastiat---a Frenchman himself!---being one of the earliest to comment on it, and easily the most famous (at least among academic economists).
 
 The logic behind the broken window fallacy, as it's called, is pretty silly once you write it out clearly:\
 \
@@ -169,17 +169,17 @@ Now let's begin an extreme thought experiment: imagine if the government decided
 
 There are a couple of problems that would arise:\
 \
-1\. Obviously, people don't like it when the government pays 90% of the working population to dig holes. People don't enjoy doing it, even if they're paid handsomely.\
+1\. Obviously, people don't like it when the government pays 90% of the working population to dig holes. People don't enjoy doing it, even if they're paid handsomely. Public opinion eventually puts a break on significant levels of useless government spending.\
 \
 2\. "Paid handsomely" is a massive overstatement! Even the 10% of workers who don't dig holes are going to be paid less in real terms, and may quit their jobs and leave the country as a result.
 
 If 90% of the country is paid to dig holes, a huge amount of real output is going to disappear. That could mean your local supermarket shuts down, there's nobody to serve you at Denny's, and nobody to repair your car if it breaks down. The price of everything people buy would massively shoot up as everything becomes incredibly scarce. The few people who are still available to do things other than dig holes will probably pivot to the most essential services people care about, filling up positions at grocery stores and power plants. Real GDP, then, would decline massively, as nominal GDP gets deflated by a now grossly inflated price level from the supply shock.
 
-The same problem applies to a more limited degree whenever the government diverts people towards activities consumers don't value. If the government successfully directs people towards an activity that is just as valuable as its paper cost suggests, all will be well. But if the government directs a meaningful number of people towards hole digging, they'll certainly get money flowing through the economy, but everyone else is going to be paid in dollars that can no longer be used to pay for whatever the hole diggers would have made instead. That has some marginal impact on people's motivation to work, and on real GDP, and if the loss of the hole diggers makes it harder for other sectors to function, we'll get cost-push inflation again, and lower real GDP.
+The same problem applies to a more limited degree whenever the government diverts people towards activities consumers don't value. If the government successfully directs people towards an activity that is just as valuable as its paper cost suggests, all will be well. But if the government directs a meaningful number of people towards hole digging, they'll certainly get money flowing through the economy, but everyone else is going to be paid in dollars that can no longer be used to pay for whatever the hole diggers would have made instead. That has some marginal impact on people's motivation to work, and on real GDP, and if the loss of the hole diggers makes it harder for other sectors to function, we'll get a supply shock again, and lower real GDP.
 
 In practice, counting government spending as part of GDP doesn't make much of a difference anyway. Below, you can see real GDP growth each year in blue. Graphed alongside it is the same measure minus the government contribution to GDP. You can tell World War 2 was a helluva time for government spending.
 
-<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKGD&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKGD&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:100%; max-width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
 
 [^n158]: [ourworldindata.org/grapher/gdp-vs-happiness](https://ourworldindata.org/grapher/gdp-vs-happiness)
 [^n159]: [ourworldindata.org/happiness-and-life-satisfaction](https://ourworldindata.org/happiness-and-life-satisfaction)
