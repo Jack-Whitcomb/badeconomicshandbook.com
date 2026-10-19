@@ -173,13 +173,11 @@ If 90% of the country is paid to dig holes, 90% of real output (excluding holes,
 
 The same problem applies to a more limited degree whenever the government diverts people towards activities consumers don't value. If the government successfully directs people towards an activity that is just as valuable as its paper cost suggests, all will be well. But if the government directs a meaningful number of people towards hole digging, they'll certainly get money flowing through the economy, but everyone else is going to be paid in dollars that can no longer be used to pay for whatever the hole diggers would have made instead. That has some marginal impact on people's motivation to work, and on real GDP, and if the loss of the hole diggers makes it harder for other sectors to function, we'll get cost-push inflation again, and lower real GDP.
 
-In practice, counting government spending as part of GDP doesn't make much of a difference anyway. Here's real GDP growth each year, in percentage points:
+In practice, counting government spending as part of GDP doesn't make much of a difference anyway. Below, you can see real GDP growth each year in blue. Graphed alongside it is the same measure minus the government contribution to GDP.
 
-<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKFP&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKGD&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
 
-And here's the same series, minus FRED's series for government spending's contribution to growth:
-
-<iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=1ZKG7&width=670&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:670px; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+In practice, it makes little difference, though you can tell World War 2 was a helluva time for government spending.
 
 [^n158]: [ourworldindata.org/grapher/gdp-vs-happiness](https://ourworldindata.org/grapher/gdp-vs-happiness)
 [^n159]: [ourworldindata.org/happiness-and-life-satisfaction](https://ourworldindata.org/happiness-and-life-satisfaction)
