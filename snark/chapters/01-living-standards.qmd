@@ -132,8 +132,6 @@ This is one of the richest countries in the world.[^n40] Adjusted for purchasing
 
 ![](../images/ch01-10.png){width="90%"}
 
-We could, of course, focus on real issues in America, like the affordability of housing. That is where we turn next.
-
 [^n7]: [youtube.com/watch?v=lolm1jiIomo](https://www.youtube.com/watch?v=lolm1jiIomo)
 [^n8]: [fred.stlouisfed.org/series/MEPAINUSA672N](https://fred.stlouisfed.org/series/MEPAINUSA672N)
 [^n9]: [fred.stlouisfed.org/series/LES1252881600Q](https://fred.stlouisfed.org/series/LES1252881600Q)
